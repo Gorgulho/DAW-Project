@@ -15,4 +15,4 @@ npm i react-router-dom
 
 ## Contributors
 
-This project whas made alongside my coleague [Ana Estreia](https://github.com/anaXtreia)
+This project was made alongside my coleague [Ana Estreia](https://github.com/anaXtreia)
