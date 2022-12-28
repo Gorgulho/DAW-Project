@@ -1,9 +1,26 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import logo from './logo.svg';
+import './App.css';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+function App2() {
+  return (
+      <div className="App2">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.tsx</code> and save to reload.
+          </p>
+          <a
+              className="App-link"
+              href="https://reactjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+      </div>
+  );
+}
+
+export default App2;

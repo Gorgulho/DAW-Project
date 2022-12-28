@@ -13,7 +13,7 @@ npm install webpack webpack-cli -g
 npm i react-router-dom
 ```
 ```bash
-npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 ```
 
 
