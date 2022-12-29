@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 import Navigation from './components/Navigation'
 
 function App() {
+
+    let recipes = [];
+
+    const getRecipes = () => {
+        Axios.get("http://localhost:8080/recipes").then((response) =>{
+            if (!response.data.message) {
+                recipes = response.data
+            }
+            console.log(response.data)
+            console.log(recipes)
+        })
+    }
+
   return (
     <div className="App">
       <Navigation/>
@@ -20,6 +34,11 @@ function App() {
         >
           Learn React
         </a>
+          <button
+          onClick={getRecipes}
+          ></button>
+
+
       </header>
     </div>
   );

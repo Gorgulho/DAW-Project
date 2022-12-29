@@ -33,11 +33,6 @@ const pages = [
 
 
 function Navigation() {
-    /*return (
-        <div className="App">
-            <Link to={"/coco"}>aaaaaaa</Link>
-        </div>
-    );*/
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
