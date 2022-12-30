@@ -18,7 +18,7 @@ import {Link} from 'react-router-dom'
 const settings = ['Logout'];
 const pages = [
     {
-        name: "home",
+        name: "Home",
         path: "/"
     },
     {
@@ -27,7 +27,7 @@ const pages = [
     },
     {
         name: "Create Recipe",
-        path: "/coco"
+        path: "/createRecipe"
     }
 ];
 
@@ -105,11 +105,15 @@ function Navigation() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page.name}</Typography>
+                                    <Link to={page.path} style={{textDecoration: 'none'}}>
+                                        <Typography textAlign="center" style={{color:'cornflowerblue'}}>{page.name}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
+
+
                     <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                     <Typography
                         variant="h5"
@@ -131,7 +135,7 @@ function Navigation() {
                     </Typography>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         {pages.map((page) => (
-                            <Link to={page.path}>
+                            <Link to={page.path} style={{textDecoration: 'none'}}>
                                 <Button
                                     key={page.name}
                                     onClick={handleCloseNavMenu}
