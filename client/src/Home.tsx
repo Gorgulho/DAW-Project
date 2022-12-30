@@ -4,8 +4,9 @@ import logo from './logo.svg';
 import './App.css';
 import Navigation from './components/Navigation'
 import Recipes from './components/Recipes'
+import Footer from './components/Footer'
 
-function Page() {
+function Home() {
 
     let recipess = [];
 
@@ -23,6 +24,7 @@ function Page() {
         <div className="App">
             <Navigation/>
             <Recipes/>
+            <Footer/>
             {/*<header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
@@ -46,4 +48,4 @@ function Page() {
     );
 }
 
-export default Page;
+export default Home;
