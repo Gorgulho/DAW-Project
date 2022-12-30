@@ -8,12 +8,9 @@ export interface IRecipe {
     _id?: number,
     name: string,
     steps: string,
-    ingredients: Ingredients[]
+    ingredients: string[]
 }
 
-export interface Ingredients {
-    ingredient: string
-}
 
 export class Worker {
     private db: Nedb;
@@ -41,9 +38,9 @@ export class Worker {
 
     }
 
-    public addRecipe(inContact: IRecipe): Promise<IRecipe> {
+    public addRecipe(inRecipe: IRecipe): Promise<IRecipe> {
         return new Promise((inResolve, inReject) => {
-            this.db.insert(inContact,
+            this.db.insert(inRecipe,
                 (inError: Error | null, inNewDoc: IRecipe) => {
                     if (inError) {
                         inReject(inError);

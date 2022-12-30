@@ -63,8 +63,9 @@ app.get("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0,
     }
 }));
 //Registro do path e do method para o endpoint que é utilizado para adicionar uma receita à lista de receitas.
-app.post("/contacts", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(inRequest.body);
         const recipesWorker = new Recipes.Worker();
         const recipe = yield recipesWorker.addRecipe(inRequest.body);
         inResponse.json(recipe); // for client acknowledgment and future use ( includesID)

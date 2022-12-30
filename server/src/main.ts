@@ -32,8 +32,9 @@ app.get("/recipes", async (inRequest: Request ,inResponse: Response ) => {
 });
 
 //Registro do path e do method para o endpoint que é utilizado para adicionar uma receita à lista de receitas.
-app.post("/contacts", async (inRequest: Request ,inResponse: Response ) => {
+app.post("/recipes", async (inRequest: Request ,inResponse: Response ) => {
     try {
+        console.log(inRequest.body)
         const recipesWorker: Recipes.Worker = new Recipes.Worker();
         const recipe: IRecipe = await recipesWorker.addRecipe(inRequest.body);
         inResponse.json(recipe); // for client acknowledgment and future use ( includesID)
