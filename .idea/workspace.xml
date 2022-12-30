@@ -7,6 +7,8 @@
     <list default="true" id="b71e4c9c-733f-4bb1-be5d-0f6ea4282093" name="Changes" comment="Server Side">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Recipes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Recipes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/build/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/recipes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/recipes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +83,8 @@
       <workItem from="1672315482578" duration="1509000" />
       <workItem from="1672325246589" duration="7755000" />
       <workItem from="1672335799730" duration="3493000" />
-      <workItem from="1672419504077" duration="906000" />
+      <workItem from="1672419504077" duration="8504000" />
+      <workItem from="1672435930635" duration="3130000" />
     </task>
     <task id="LOCAL-00001" summary="First">
       <created>1672164657805</created>
@@ -132,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672271293030</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Server Side">
+      <created>1672423646415</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1672423646415</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +167,7 @@
     <MESSAGE value="Navigation Test" />
     <MESSAGE value="Changes" />
     <MESSAGE value="navBar" />
-    <option name="LAST_COMMIT_MESSAGE" value="navBar" />
+    <MESSAGE value="Server Side" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server Side" />
   </component>
 </project>

@@ -9,7 +9,7 @@ export interface IRecipe {
     name: string,
     steps: string,
     description: string,
-    ingredients: string[]
+    ingredients: string
 }
 
 
@@ -27,6 +27,21 @@ export class Worker {
     public listRecipes(): Promise<IRecipe[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({},
+                (inError: Error | null, inDocs: IRecipe[]) => {
+                    if (inError) {
+                        inReject(inError);
+                    } else {
+                        inResolve(inDocs);
+                    }
+                }
+            );
+        });
+
+    }
+
+    public listRecipe(inID: string): Promise<IRecipe[]> {
+        return new Promise((inResolve, inReject) => {
+            this.db.find({_id: inID},
                 (inError: Error | null, inDocs: IRecipe[]) => {
                     if (inError) {
                         inReject(inError);

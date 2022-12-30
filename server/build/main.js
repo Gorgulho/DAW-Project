@@ -62,6 +62,18 @@ app.get("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0,
         inResponse.send({ message: "No recipes in the Data Base" });
     }
 }));
+//Registro do path e do method para o endpoint que é utilizado para obter uma receita pelo ID.
+app.get("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const recipesWorker = new Recipes.Worker();
+        const recipes = yield recipesWorker.listRecipe(inRequest.params.id);
+        inResponse.json(recipes); // serialize object into JSON
+        //TODO: code to access all recipes
+    }
+    catch (inError) {
+        inResponse.send({ message: "No recipes in the Data Base" });
+    }
+}));
 //Registro do path e do method para o endpoint que é utilizado para adicionar uma receita à lista de receitas.
 app.post("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -76,7 +88,7 @@ app.post("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0
     }
 }));
 //Registro do path e do method para o endpoint que é utilizado para eliminar uma receita em especifico.
-app.delete("/contacts/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+app.delete("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const recipesWorker = new Recipes.Worker();
         yield recipesWorker.deleteRecipe(inRequest.params.id);

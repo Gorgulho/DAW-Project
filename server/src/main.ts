@@ -31,6 +31,18 @@ app.get("/recipes", async (inRequest: Request ,inResponse: Response ) => {
     }
 });
 
+//Registro do path e do method para o endpoint que é utilizado para obter uma receita pelo ID.
+app.get("/recipes/:id", async (inRequest: Request ,inResponse: Response ) => {
+    try {
+        const recipesWorker: Recipes.Worker = new Recipes.Worker();
+        const recipes: IRecipe[] = await recipesWorker.listRecipe(inRequest.params.id);
+        inResponse.json(recipes); // serialize object into JSON
+        //TODO: code to access all recipes
+    } catch (inError) {
+        inResponse.send ({message: "No recipes in the Data Base"}) ;
+    }
+});
+
 //Registro do path e do method para o endpoint que é utilizado para adicionar uma receita à lista de receitas.
 app.post("/recipes", async (inRequest: Request ,inResponse: Response ) => {
     try {
@@ -45,7 +57,7 @@ app.post("/recipes", async (inRequest: Request ,inResponse: Response ) => {
 });
 
 //Registro do path e do method para o endpoint que é utilizado para eliminar uma receita em especifico.
-app.delete("/contacts/:id", async (inRequest: Request, inResponse: Response) => {
+app.delete("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
     try {
         const recipesWorker: Recipes.Worker = new Recipes.Worker();
         await recipesWorker.deleteRecipe(inRequest.params.id);
