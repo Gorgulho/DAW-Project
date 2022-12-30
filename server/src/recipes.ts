@@ -8,6 +8,7 @@ export interface IRecipe {
     _id?: number,
     name: string,
     steps: string,
+    description: string,
     ingredients: string[]
 }
 

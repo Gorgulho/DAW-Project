@@ -42,6 +42,7 @@ function Recipes(){
 
     return(
         <Grid container spacing={6}>
+            {/*place map*/}
             <Grid item xs="auto">
                 <Card sx={{ maxWidth: 345 , m: 5}}>
                     <CardHeader
@@ -108,6 +109,7 @@ function Recipes(){
                     </Collapse>
                 </Card>
             </Grid>
+            {/**/}
             <Grid item xs="auto">
                 <Card sx={{ maxWidth: 345 , m: 5}}>
                     <CardHeader
