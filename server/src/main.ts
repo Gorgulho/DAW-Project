@@ -28,7 +28,6 @@ app.get("/recipes", async (inRequest: Request ,inResponse: Response ) => {
         const recipes: IRecipe[] = await recipesWorker.listRecipes();
         if (recipes.length == 0) inResponse.send({message: "No recipes in the Data Base"})
         else inResponse.json(recipes); // serialize object into JSON
-        //TODO: code to access all recipes
     } catch (inError) {
         inResponse.send (inError) ;
     }
@@ -39,10 +38,10 @@ app.get("/recipes/:id", async (inRequest: Request ,inResponse: Response ) => {
     try {
         const recipesWorker: Recipes.Worker = new Recipes.Worker();
         const recipes: IRecipe[] = await recipesWorker.listRecipe(inRequest.params.id);
-        inResponse.json(recipes); // serialize object into JSON
-        //TODO: code to access all recipes
+        if (recipes.length == 0) inResponse.send({message: "No recipes in the Data Base corresponding to that ID"})
+        else inResponse.json(recipes); // serialize object into JSON
     } catch (inError) {
-        inResponse.send ({message: "No recipes in the Data Base"}) ;
+        inResponse.send (inError) ;
     }
 });
 
@@ -52,10 +51,9 @@ app.post("/recipes", async (inRequest: Request ,inResponse: Response ) => {
         console.log(inRequest.body)
         const recipesWorker: Recipes.Worker = new Recipes.Worker();
         const recipe: IRecipe = await recipesWorker.addRecipe(inRequest.body);
-        inResponse.json(recipe); // for client acknowledgment and future use ( includesID)
-        //TODO: code to add recipes
+        inResponse.json(recipe); // for client acknowledgment and future use (includes ID)
     } catch (inError) {
-        inResponse.send("error") ;
+        inResponse.send(inError) ;
     }
 });
 
@@ -65,9 +63,9 @@ app.delete("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         const recipesWorker: Recipes.Worker = new Recipes.Worker();
         await recipesWorker.deleteRecipe(inRequest.params.id);
         inResponse.send("ok");
-        //TODO: code to delete one recipe by ID
+        //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
     } catch ( inError ) {
-        inResponse.send("error") ;
+        inResponse.send(inError) ;
     }
 });
 
@@ -89,16 +87,12 @@ app.get("/menus", async(inRequest: Request, inResponse: Response) => {
                 return 1;
             }
             return 0
-            /*let dateA = Date.parse(a.date)
-            let dateB = Date.parse(b.date)
+        }) //order by date field
 
-            return dateB - dateA; //ver com a Ana um bom algoritmo para ordenar esta budega*/
-        })
-
-        inResponse.json(menus); // serialize object into JSON
-        //TODO: code to access all recipes
+        if (menus.length == 0) inResponse.send({message: "No recipes in the Data Base"})
+        else inResponse.json(menus); // serialize object into JSON
     } catch (inError) {
-        inResponse.send ({message: "No recipes in the Data Base"}) ;
+        inResponse.send (inError) ;
     }
 })
 
@@ -108,11 +102,20 @@ app.post("/menus", async (inRequest: Request ,inResponse: Response ) => {
         const menusWorker: Menus.Worker = new Menus.Worker();
         const Menu: IMenu = await menusWorker.addMenu(inRequest.body);
         inResponse.json(Menu); // for client acknowledgment and future use ( includesID)
-        //TODO: code to add recipes
     } catch (inError) {
-        inResponse.send("error") ;
+        inResponse.send(inError) ;
     }
 });
+
+app.delete("/menus/:id", async (inRequest: Request, inResponse: Response) => {
+    try {
+        const menusWorker: Menus.Worker = new Menus.Worker();
+        await menusWorker.deleteMenuByID(inRequest.params.id);
+        inResponse.send("ok");
+    } catch (inError) {
+        inResponse.send(inError)
+    }
+})
 
 
 

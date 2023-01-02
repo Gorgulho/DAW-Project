@@ -33,7 +33,7 @@ function App() {
 
     const handleChange = (newValue: Dayjs | null) => {
         setValue(newValue);
-        console.log(dayjs(value).format('DD/MM/YYYY')) //place this in the input to convert the date
+        console.log(dayjs(value).format('MMMM DD YYYY')) //place this in the input to convert the date
         console.log(value)
     };
 
@@ -47,6 +47,8 @@ function App() {
                     value={value}
                     onChange={(newValue) => {
                         setValue(newValue);
+                        console.log(dayjs(value).format('MMMM DD YYYY')) //place this in the input to convert the date
+                        console.log(value)
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
