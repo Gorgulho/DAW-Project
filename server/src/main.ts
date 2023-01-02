@@ -26,10 +26,11 @@ app.get("/recipes", async (inRequest: Request ,inResponse: Response ) => {
     try {
         const recipesWorker: Recipes.Worker = new Recipes.Worker();
         const recipes: IRecipe[] = await recipesWorker.listRecipes();
-        inResponse.json(recipes); // serialize object into JSON
+        if (recipes.length == 0) inResponse.send({message: "No recipes in the Data Base"})
+        else inResponse.json(recipes); // serialize object into JSON
         //TODO: code to access all recipes
     } catch (inError) {
-        inResponse.send ({message: "No recipes in the Data Base"}) ;
+        inResponse.send (inError) ;
     }
 });
 

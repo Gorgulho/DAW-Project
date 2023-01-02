@@ -15,8 +15,6 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import {Grid} from "@mui/material";
-import {Link} from "react-router-dom";
-import Button from "@mui/material/Button";
 
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -35,18 +33,22 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 function Recipes() {
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     const [recipes, setRecipes] = useState([]);
+    const [message, setMessage] = useState("");
 
     async function fetchData() {
         const response = await fetch("http://localhost:8080/recipes")
         const json = await response.json()
-        setRecipes(json);
+        console.log(json)
+        if(json.message) setMessage(json.message)
+        else setRecipes(json);
     }
 
     useEffect(() => {
@@ -55,6 +57,9 @@ function Recipes() {
 
     return (
         <Grid container spacing={6}>
+            <Typography variant="subtitle1" component="div">
+                {message} {/*Resolve isto Ana*/}
+            </Typography>
             {recipes.map(recipe =>
                 <Grid item xs="auto" key={recipe._id}>
                     <Card sx={{maxWidth: 345, m: 5}}>

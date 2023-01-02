@@ -56,11 +56,14 @@ app.get("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0,
     try {
         const recipesWorker = new Recipes.Worker();
         const recipes = yield recipesWorker.listRecipes();
-        inResponse.json(recipes); // serialize object into JSON
+        if (recipes.length == 0)
+            inResponse.send({ message: "No recipes in the Data Base" });
+        else
+            inResponse.json(recipes); // serialize object into JSON
         //TODO: code to access all recipes
     }
     catch (inError) {
-        inResponse.send({ message: "No recipes in the Data Base" });
+        inResponse.send(inError);
     }
 }));
 //Registro do path e do method para o endpoint que é utilizado para obter uma receita pelo ID.
