@@ -18,15 +18,17 @@ function Create() {
 
     const addRecipe = async () => {
         try {
-            await fetch("http://localhost:8080/recipes", {
-                body: JSON.stringify({
-                    name, description, ingredients, instructions
-                }),
-                headers: {
-                    "Content-type": "application/json"
-                },
-                method: "POST"
-            })
+            if(name !== "" && description !== "" && ingredients !== "" && instructions !== "") {
+                await fetch("http://localhost:8080/recipes", {
+                    body: JSON.stringify({
+                        name, description, ingredients, instructions
+                    }),
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    method: "POST"
+                })
+            }
             //TODO: Add action after server response
         } catch (error) {
             console.error(error)

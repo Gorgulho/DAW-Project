@@ -54,7 +54,8 @@ function Recipes() {
 
     return (
         <div>
-            <Container>
+
+            {message ? <Container>
                 <Card  sx={{m:3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                     <CardContent>
                         <Typography variant="h5">
@@ -62,7 +63,9 @@ function Recipes() {
                         </Typography>
                     </CardContent>
                 </Card>
-            </Container>
+            </Container> : null}
+
+
             <Grid container spacing={6}>
                 {recipes.map(recipe =>
                     <Grid item xs="auto" key={recipe._id}>
