@@ -28,8 +28,7 @@ function Create() {
                 method: "POST"
             })
             //TODO: Add action after server response
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error)
         }
     }
@@ -37,75 +36,83 @@ function Create() {
     return (
         <div className="App">
             <Navigation/>
-            <Container component="form" style={{maxWidth:600}}>
-                <Card sx={{m:2}}>
+            <Container component="form" style={{maxWidth: 600}}>
+                <Card sx={{m: 2}}>
                     <CardHeader
                         title="Write your recipe here"
                     />
                     <CardContent>
-                        <div>
-                            <TextField
-                                style={{width:450}}
-                                sx={{m:2}}
-                                id="fullWidth"
-                                value={name}
-                                onChange={(newValue) => {
-                                    setName(newValue.target.value);
-                                    console.log(name)
-                                }}
-                                label="Title"
-                                variant="outlined" />
+                        <form>
+                            <div>
+                                <TextField
+                                    style={{width: 450}}
+                                    sx={{m: 2}}
+                                    id="fullWidth"
+                                    value={name}
+                                    onChange={(newValue) => {
+                                        setName(newValue.target.value);
+                                        console.log(name)
+                                    }}
+                                    required
+                                    label="Title"
+                                    variant="outlined"/>
 
-                        </div>
-                        <div>
-                            <TextField
-                                style={{width:450}}
-                                sx={{m:2}}
-                                id="fullWidth"
-                                value={description}
-                                onChange={(newValue) => {
-                                    setDescription(newValue.target.value);
-                                    console.log(description)
-                                }}
-                                label="Description"
-                                multiline
-                                maxRows={4}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                sx={{m:2}}
-                                id="outlined-textarea"
-                                value={ingredients}
-                                onChange={(newValue) => {
-                                    setIngredients(newValue.target.value);
-                                    console.log(ingredients)
-                                }}
-                                label="Ingredients"
-                                placeholder="Write down what ingredients you need"
-                                minRows={4}
-                                multiline
-                            />
-                            <TextField
-                                sx={{m:2}}
-                                id="outlined-textarea"
-                                value={instructions}
-                                onChange={(newValue) => {
-                                    setInstructions(newValue.target.value);
-                                    console.log(instructions)
-                                }}
-                                label="Instructions"
-                                placeholder="Write down the steps to take"
-                                minRows={4}
-                                multiline
-                            />
-                        </div>
-                        <Button variant="contained" onClick={addRecipe}>Submit</Button>
+                            </div>
+                            <div>
+                                <TextField
+                                    style={{width: 450}}
+                                    sx={{m: 2}}
+                                    id="fullWidth"
+                                    value={description}
+                                    onChange={(newValue) => {
+                                        setDescription(newValue.target.value);
+                                        console.log(description)
+                                    }}
+                                    required
+                                    label="Description"
+                                    multiline
+                                    maxRows={4}
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    sx={{m: 2}}
+                                    id="outlined-textarea"
+                                    value={ingredients}
+                                    onChange={(newValue) => {
+                                        setIngredients(newValue.target.value);
+                                        console.log(ingredients)
+                                    }}
+                                    required
+                                    label="Ingredients"
+                                    placeholder="Write down what ingredients you need"
+                                    minRows={4}
+                                    multiline
+                                />
+                                <TextField
+                                    sx={{m: 2}}
+                                    id="outlined-textarea"
+                                    value={instructions}
+                                    onChange={(newValue) => {
+                                        setInstructions(newValue.target.value);
+                                        console.log(instructions)
+                                    }}
+                                    required
+                                    label="Instructions"
+                                    placeholder="Write down the steps to take"
+                                    minRows={4}
+                                    multiline
+                                />
+                            </div>
+                            <Button type="submit" variant="contained" onClick={addRecipe}>Submit</Button>
+                        </form>
                     </CardContent>
                 </Card>
             </Container>
             <Footer/>
         </div>
-    );
+    )
+        ;
 }
+
 export default Create;
