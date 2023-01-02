@@ -2,7 +2,7 @@ import Navigation from './Navigation'
 import Footer from './Footer'
 import React, {useState} from "react";
 import '../App.css';
-import {Button, Card, Container, TextField} from "@mui/material";
+import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CardActions from "@mui/material/CardActions";
@@ -37,12 +37,12 @@ function Create() {
         <div className="App">
             <Navigation/>
             <Container component="form" style={{maxWidth: 600}}>
-                <Card sx={{m: 2}}>
+                <Card sx={{m: 2}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                     <CardHeader
                         title="Write your recipe here"
                     />
                     <CardContent>
-                        <form>
+                        <FormControl>
                             <div>
                                 <TextField
                                     style={{width: 450}}
@@ -105,7 +105,7 @@ function Create() {
                                 />
                             </div>
                             <Button type="submit" variant="contained" onClick={addRecipe}>Submit</Button>
-                        </form>
+                        </FormControl>
                     </CardContent>
                 </Card>
             </Container>
