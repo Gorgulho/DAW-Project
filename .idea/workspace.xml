@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b71e4c9c-733f-4bb1-be5d-0f6ea4282093" name="Changes" comment="recipes">
-      <change afterPath="$PROJECT_DIR$/client/src/CreateRecipe.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Footer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/recipes.css" afterDir="false" />
+    <list default="true" id="b71e4c9c-733f-4bb1-be5d-0f6ea4282093" name="Changes" comment="Server Side">
+      <change afterPath="$PROJECT_DIR$/server/src/menus.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/CreateRecipe.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/CreateRecipe.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Recipes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Recipes.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/build/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/recipes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/recipes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,29 +35,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/jamg/Documents/DAW/final_project/client",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "ts.external.directory.path": "C:\\Users\\anate\\WebstormProjects\\DAW-Project\\client\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;js.last.introduce.type&quot;: &quot;LET&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jamg/Documents/DAW/final_project/client&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\jamg\\Documents\\DAW\\final_project\\server\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jamg\Documents\DAW\final_project\client" />
       <recent name="C:\Users\jamg\Documents\DAW\final_project\server" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jamg\Documents\DAW\final_project\client\src\components" />
       <recent name="C:\Users\anate\WebstormProjects\DAW-Project\client\src\components" />
     </key>
   </component>
@@ -91,6 +96,11 @@
       <workItem from="1672325246589" duration="7755000" />
       <workItem from="1672335799730" duration="3493000" />
       <workItem from="1672419504077" duration="906000" />
+      <workItem from="1672499385112" duration="9809000" />
+      <workItem from="1672516542570" duration="252000" />
+      <workItem from="1672598491322" duration="422000" />
+      <workItem from="1672601898748" duration="4504000" />
+      <workItem from="1672622015306" duration="1166000" />
     </task>
     <task id="LOCAL-00001" summary="First">
       <created>1672164657805</created>

@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const express_1 = __importDefault(require("express"));
 const Recipes = __importStar(require("./recipes"));
+const Menus = __importStar(require("./menus"));
 //Criação de uma express APP, assim como, de uma middleware que a torne útil
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -99,4 +100,43 @@ app.delete("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, 
         inResponse.send("error");
     }
 }));
-app.listen(8080);
+//Menu end points
+app.get("/menus", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const menusWorker = new Menus.Worker();
+        const menus = yield menusWorker.listMenus();
+        menus.sort(function (a, b) {
+            let dateA = new Date(a.date);
+            let dateB = new Date(b.date);
+            if (dateA < dateB) {
+                return -1;
+            }
+            if (dateA > dateB) {
+                return 1;
+            }
+            return 0;
+            /*let dateA = Date.parse(a.date)
+            let dateB = Date.parse(b.date)
+
+            return dateB - dateA; //ver com a Ana um bom algoritmo para ordenar esta budega*/
+        });
+        inResponse.json(menus); // serialize object into JSON
+        //TODO: code to access all recipes
+    }
+    catch (inError) {
+        inResponse.send({ message: "No recipes in the Data Base" });
+    }
+}));
+app.post("/menus", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log(inRequest.body);
+        const menusWorker = new Menus.Worker();
+        const Menu = yield menusWorker.addMenu(inRequest.body);
+        inResponse.json(Menu); // for client acknowledgment and future use ( includesID)
+        //TODO: code to add recipes
+    }
+    catch (inError) {
+        inResponse.send("error");
+    }
+}));
+app.listen(8080, () => console.log("listening"));

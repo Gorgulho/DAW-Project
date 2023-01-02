@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import App2 from './App.test'
 import Home from './Home'
-import Create from './CreateRecipe'
+import Create from './components/CreateRecipe'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
@@ -16,7 +16,7 @@ root.render(
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/createRecipe" element={<Create />} />
-              <Route path="/coco" element={<App2 />}/>
+              <Route path="/test" element={<App />}/>
           </Routes>
       </Router>
   </React.StrictMode>

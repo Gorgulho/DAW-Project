@@ -4,6 +4,8 @@ import express,{Express, NextFunction, Request, Response } from "express";
 
 import * as Recipes from "./recipes";
 import {IRecipe} from "./recipes";
+import * as Menus from "./menus";
+import {IMenu} from "./menus";
 
 //Criação de uma express APP, assim como, de uma middleware que a torne útil
 const app : Express = express() ;
@@ -68,4 +70,52 @@ app.delete("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
     }
 });
 
-app.listen(8080);
+//Menu end points
+
+app.get("/menus", async(inRequest: Request, inResponse: Response) => {
+    try {
+        const menusWorker: Menus.Worker = new Menus.Worker();
+        const menus: IMenu[] = await menusWorker.listMenus();
+
+        menus.sort(function(a, b) {
+            let dateA = new Date(a.date);
+            let dateB = new Date(b.date);
+
+            if (dateA < dateB ) {
+                return -1;
+            }
+            if (dateA > dateB ) {
+                return 1;
+            }
+            return 0
+            /*let dateA = Date.parse(a.date)
+            let dateB = Date.parse(b.date)
+
+            return dateB - dateA; //ver com a Ana um bom algoritmo para ordenar esta budega*/
+        })
+
+        inResponse.json(menus); // serialize object into JSON
+        //TODO: code to access all recipes
+    } catch (inError) {
+        inResponse.send ({message: "No recipes in the Data Base"}) ;
+    }
+})
+
+app.post("/menus", async (inRequest: Request ,inResponse: Response ) => {
+    try {
+        console.log(inRequest.body)
+        const menusWorker: Menus.Worker = new Menus.Worker();
+        const Menu: IMenu = await menusWorker.addMenu(inRequest.body);
+        inResponse.json(Menu); // for client acknowledgment and future use ( includesID)
+        //TODO: code to add recipes
+    } catch (inError) {
+        inResponse.send("error") ;
+    }
+});
+
+
+
+
+
+
+app.listen(8080, () => console.log("listening"))
