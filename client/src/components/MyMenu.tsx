@@ -37,7 +37,7 @@ function Menu(){
             </Container> : null}
 
             {menus.map(menu =>
-                <Container>
+                <Container key={menu._id}>
                     <Card sx={{mt: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                         <CardHeader
                             title={menu.date}

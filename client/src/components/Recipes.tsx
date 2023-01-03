@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
@@ -189,11 +188,6 @@ function Recipes() {
                     <Grid item xs="auto" key={recipe._id}>
                         <Card sx={{maxWidth: 345, m: 5}}>
                             <CardHeader
-                                action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon/>
-                                    </IconButton>
-                                }
                                 title={recipe.name}
                             />
                             <CardContent>
@@ -214,6 +208,8 @@ function Recipes() {
                                 }}>
                                     <OpenInNewIcon/>
                                 </IconButton>
+
+                                <Button color="secondary">Update</Button>
 
                                 <IconButton aria-label="delete" size="large" sx={{
                                     "&:hover": {
