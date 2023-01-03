@@ -96,7 +96,7 @@ app.delete("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, 
     try {
         const recipesWorker = new Recipes.Worker();
         yield recipesWorker.deleteRecipe(inRequest.params.id);
-        inResponse.send("ok");
+        inResponse.send({ message: "deleted" });
         //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
     }
     catch (inError) {
