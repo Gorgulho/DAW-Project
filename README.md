@@ -1,22 +1,17 @@
 # Final project within the scope of DAW
 
-Small project that includes a client side and a server side
+Small project that includes a client side and a server side.
+This project consists in an application to manage recipes!
 
 ## Installation
 
-Run the following codes inside the client folder for the dependencies
+Run the following code inside the client and server folder to install all the dependencies 
 
 ```bash
-npm install webpack webpack-cli -g
-```
-```bash
-npm i react-router-dom
-```
-```bash
-npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+npm install 
 ```
 
 
 ## Contributors
 
-This project was made alongside my colleague [Ana Estreia](https://github.com/anaXtreia)
+This project was made by[João Gorgulho](https://github.com/Gorgulho) and [Ana Estreia](https://github.com/anaXtreia)
