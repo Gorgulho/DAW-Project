@@ -114,19 +114,24 @@ function Recipes() {
                                     Add to Menu
                                 </Button>
 
-                                <IconButton aria-label="delete" size="large" sx={{
-                                    "&:hover": {
-                                        color: "green",
-                                    }
-                                }}>
-                                    <OpenInNewIcon/>
-                                </IconButton>
-
                                 <Link to={{
+                                    pathname: '/recipe',
+                                    search: '?id='+recipe._id
+                                }}>
+                                    <IconButton aria-label="delete" size="large" sx={{
+                                        "&:hover": {
+                                            color: "green",
+                                        }
+                                    }}>
+                                        <OpenInNewIcon/>
+                                    </IconButton>
+                                </Link>
+
+                                <Link style={{textDecoration: 'none'}} to={{
                                     pathname: '/update',
                                     search: '?id='+recipe._id
                                 }}>
-                                    <Button color="secondary">Update</Button>
+                                    <Button variant="text" >Update</Button>
                                 </Link>
                                 <IconButton aria-label="delete" size="large" sx={{
                                     "&:hover": {

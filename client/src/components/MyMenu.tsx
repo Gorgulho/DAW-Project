@@ -23,11 +23,11 @@ function Menu(){
     }, []);
 
     return(
-        <div >
+        <div className="App">
             <Navigation/>
 
             {message ? <Container>
-                <Card  sx={{m:3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
+                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                     <CardContent>
                         <Typography variant="h5">
                             {message}

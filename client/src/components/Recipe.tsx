@@ -1,39 +1,64 @@
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Card, CardContent, CardHeader, Container, Typography} from "@mui/material";
+import {useLocation} from "react-router-dom";
 
 function Recipe(){
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const [id, setId] = useState(queryParams.get('id'));
+
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [ingredients, setIngredients] = useState("");
+    const [instructions, setInstructions] = useState("");
+
+    const [recipe, setRecipe] = useState([]);
+
+    async function fetchRecipe(ID: string) {
+        const response = await fetch("http://localhost:8080/recipes/" + ID)
+        const json = await response.json()
+        if (!json.message) setRecipe(json)
+    }
+
+    useEffect(() => {
+        fetchRecipe(id)
+    }, []);
+
+    useEffect(() => {
+        if(recipe.length > 0) {
+            setName(recipe[0].name)
+            setIngredients(recipe[0].ingredients)
+            setDescription(recipe[0].description)
+            setInstructions(recipe[0].instructions)
+        }
+    }, [recipe])
+
     return(
         <div >
         <Navigation/>
         <Container sx={{mt: 5}}>
             <Card style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                 <CardHeader
-                    title="Papas de Aveia"
+                    title={name}
                 />
                 <CardContent>
                     <Typography paragraph sx={{whiteSpace: 'pre-line'}}>
-                        Receita super fácil de fazer. Pronta em 5 minutos.
+                        {description}
                     </Typography>
                     <Container style={{display: "flex"}}>
                         <Container >
                             <Typography sx={{ fontWeight: 'bold' }}>Ingredients:</Typography>
                             <Typography paragraph sx={{whiteSpace: 'pre-line'}}>
-                                200 ml de leite
-                                30 g de flocos de aveia
-                                10 g de açúcar
-                                1 pau de canela
-                                raspas de limão (a gosto)
-                                mel (a gosto)
+                                {ingredients}
                             </Typography>
                         </Container>
 
                         <Container>
                             <Typography sx={{ fontWeight: 'bold' }}>Instructions:</Typography>
                             <Typography paragraph sx={{whiteSpace: 'pre-line'}}>
-                                Num tacho, juntar o leite, a aveia, o açúcar, o pau de canela e as raspas de limão a lume brando.
-                                Mexer com uma espátula até obter a consistência desejada. Servir com canela em pó e mel a gosto.
+                                {instructions}
                             </Typography>
                         </Container>
                     </Container>
