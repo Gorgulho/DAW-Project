@@ -19,7 +19,7 @@ function Menu(){
     }
 
     useEffect(() => {
-        fetchData();
+        fetchData().catch(() =>setMessage("Can't connect to the server"));
     }, []);
 
     return(

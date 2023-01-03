@@ -47,7 +47,7 @@ app.use(express_1.default.json());
 app.use("/", express_1.default.static(path_1.default.join(__dirname, "../../client/dist")));
 app.use(function (inRequest, inResponse, inNext) {
     inResponse.header("Access-Control-Allow-Origin", "*");
-    inResponse.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+    inResponse.header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS, PUT");
     inResponse.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     inNext();
 });
@@ -97,6 +97,18 @@ app.delete("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, 
         const recipesWorker = new Recipes.Worker();
         yield recipesWorker.deleteRecipe(inRequest.params.id);
         inResponse.send({ message: "deleted" });
+        //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
+    }
+    catch (inError) {
+        inResponse.send(inError);
+    }
+}));
+//Registro do path e do method para o endpoint que é utilizado para atualizar uma receita em especifico.
+app.put("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const recipesWorker = new Recipes.Worker();
+        yield recipesWorker.updateRecipe(inRequest.params.id, inRequest.body);
+        inResponse.send({ message: "Updated" });
         //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
     }
     catch (inError) {

@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import DeleteDialog from "./DeleteDialog";
 import MenuDialog from "./MenuDialog";
+import {Link} from "react-router-dom";
 
 function Recipes() {
 
@@ -52,7 +53,7 @@ function Recipes() {
     }
 
     useEffect(() => {
-        fetchRecipes().then((response) => console.log(response));
+        fetchRecipes().then((response) => console.log(response)).catch(() =>setMessage("Can't connect to the server"));
     }, []);
 
 
@@ -68,7 +69,6 @@ function Recipes() {
                     </CardContent>
                 </Card>
             </Container> : null}
-
 
             <DeleteDialog
                 open={openDelete}
@@ -122,8 +122,12 @@ function Recipes() {
                                     <OpenInNewIcon/>
                                 </IconButton>
 
-                                <Button color="secondary">Update</Button>
-
+                                <Link to={{
+                                    pathname: '/update',
+                                    search: '?id='+recipe._id
+                                }}>
+                                    <Button color="secondary">Update</Button>
+                                </Link>
                                 <IconButton aria-label="delete" size="large" sx={{
                                     "&:hover": {
                                         color: "red",

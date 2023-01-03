@@ -1,20 +1,80 @@
 import Navigation from './Navigation'
 import Footer from './Footer'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../App.css';
 import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
+import { useLocation } from 'react-router-dom';
+import Typography from "@mui/material/Typography";
 
 function Update() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const [id, setId] = useState(queryParams.get('id'));
+
+    const [message, setMessage] = useState("");
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState("");
 
+    const [recipe, setRecipe] = useState([]);
+
+    const updateRecipe = async (ID : string) => {
+        try {
+            if(name !== "" && description !== "" && ingredients !== "" && instructions !== "") {
+                await fetch("http://localhost:8080/recipes/"+ID, {
+                    body: JSON.stringify({
+                        name, description, ingredients, instructions
+                    }),
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    method: "PUT"
+                }).then(() => {
+                    setMessage("Recipe updated successfully")
+                })
+            } else {
+                setMessage("Fill all fields first")
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async function fetchRecipe(ID: string) {
+        const response = await fetch("http://localhost:8080/recipes/" + ID)
+        const json = await response.json()
+        if (!json.message) setRecipe(json)
+    }
+
+    useEffect(() => {
+        fetchRecipe(id)
+    }, []);
+
+    useEffect(() => {
+        if(recipe.length > 0) {
+            setName(recipe[0].name)
+            setIngredients(recipe[0].ingredients)
+            setDescription(recipe[0].description)
+            setInstructions(recipe[0].instructions)
+        }
+    }, [recipe])
+
     return (
         <div className="App">
             <Navigation/>
+            {message ? <Container>
+                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
+                    <CardContent>
+                        <Typography variant="h5">
+                            {message}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Container> : null}
             <Container component="form" style={{maxWidth: 600}}>
                 <Card sx={{m: 2}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                     <CardHeader
@@ -83,7 +143,7 @@ function Update() {
                                     multiline
                                 />
                             </div>
-                            <Button type="submit" variant="contained">Submit</Button>
+                            <Button variant="contained" onClick={() => updateRecipe(id)}>Submit</Button>
                         </FormControl>
                     </CardContent>
                 </Card>

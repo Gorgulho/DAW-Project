@@ -81,4 +81,18 @@ export class Worker {
             );
         });
     }
+
+    public updateRecipe(inID: string, fields: IRecipe): Promise<void> {
+        return new Promise((inResolve, inReject) => {
+            this.db.update({ _id: inID }, {name:fields.name, description:fields.description, ingredients:fields.ingredients, instructions:fields.instructions},{},
+                (inError: Error | null, inNumRemoved: number) => {
+                    if (inError) {
+                        inReject(inError);
+                    } else {
+                        inResolve();
+                    }
+                }
+            );
+        });
+    }
 }
