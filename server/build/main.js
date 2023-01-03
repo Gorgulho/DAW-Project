@@ -60,7 +60,6 @@ app.get("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0,
             inResponse.send({ message: "No recipes in the Data Base" });
         else
             inResponse.json(recipes); // serialize object into JSON
-        //TODO: code to access all recipes
     }
     catch (inError) {
         inResponse.send(inError);
@@ -71,11 +70,13 @@ app.get("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, voi
     try {
         const recipesWorker = new Recipes.Worker();
         const recipes = yield recipesWorker.listRecipe(inRequest.params.id);
-        inResponse.json(recipes); // serialize object into JSON
-        //TODO: code to access all recipes
+        if (recipes.length == 0)
+            inResponse.send({ message: "No recipes in the Data Base corresponding to that ID" });
+        else
+            inResponse.json(recipes); // serialize object into JSON
     }
     catch (inError) {
-        inResponse.send({ message: "No recipes in the Data Base" });
+        inResponse.send(inError);
     }
 }));
 //Registro do path e do method para o endpoint que é utilizado para adicionar uma receita à lista de receitas.
@@ -84,11 +85,10 @@ app.post("/recipes", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0
         console.log(inRequest.body);
         const recipesWorker = new Recipes.Worker();
         const recipe = yield recipesWorker.addRecipe(inRequest.body);
-        inResponse.json(recipe); // for client acknowledgment and future use ( includesID)
-        //TODO: code to add recipes
+        inResponse.json(recipe); // for client acknowledgment and future use (includes ID)
     }
     catch (inError) {
-        inResponse.send("error");
+        inResponse.send(inError);
     }
 }));
 //Registro do path e do method para o endpoint que é utilizado para eliminar uma receita em especifico.
@@ -97,10 +97,10 @@ app.delete("/recipes/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, 
         const recipesWorker = new Recipes.Worker();
         yield recipesWorker.deleteRecipe(inRequest.params.id);
         inResponse.send("ok");
-        //TODO: code to delete one recipe by ID
+        //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
     }
     catch (inError) {
-        inResponse.send("error");
+        inResponse.send(inError);
     }
 }));
 //Menu end points
@@ -118,16 +118,14 @@ app.get("/menus", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, f
                 return 1;
             }
             return 0;
-            /*let dateA = Date.parse(a.date)
-            let dateB = Date.parse(b.date)
-
-            return dateB - dateA; //ver com a Ana um bom algoritmo para ordenar esta budega*/
-        });
-        inResponse.json(menus); // serialize object into JSON
-        //TODO: code to access all recipes
+        }); //order by date field
+        if (menus.length == 0)
+            inResponse.send({ message: "No recipes in the Data Base" });
+        else
+            inResponse.json(menus); // serialize object into JSON
     }
     catch (inError) {
-        inResponse.send({ message: "No recipes in the Data Base" });
+        inResponse.send(inError);
     }
 }));
 app.post("/menus", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
@@ -136,10 +134,19 @@ app.post("/menus", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, 
         const menusWorker = new Menus.Worker();
         const Menu = yield menusWorker.addMenu(inRequest.body);
         inResponse.json(Menu); // for client acknowledgment and future use ( includesID)
-        //TODO: code to add recipes
     }
     catch (inError) {
-        inResponse.send("error");
+        inResponse.send(inError);
+    }
+}));
+app.delete("/menus/:id", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const menusWorker = new Menus.Worker();
+        yield menusWorker.deleteMenuByID(inRequest.params.id);
+        inResponse.send("ok");
+    }
+    catch (inError) {
+        inResponse.send(inError);
     }
 }));
 app.listen(8080, () => console.log("listening"));

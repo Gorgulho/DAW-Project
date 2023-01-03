@@ -101,7 +101,7 @@ app.post("/menus", async (inRequest: Request ,inResponse: Response ) => {
         console.log(inRequest.body)
         const menusWorker: Menus.Worker = new Menus.Worker();
         const Menu: IMenu = await menusWorker.addMenu(inRequest.body);
-        inResponse.json(Menu); // for client acknowledgment and future use ( includesID)
+        inResponse.json(Menu); // for client acknowledgment and future use (includesID)
     } catch (inError) {
         inResponse.send(inError) ;
     }

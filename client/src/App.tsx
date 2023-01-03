@@ -27,15 +27,10 @@ function App() {
 
     const date = new Date();
 
-    const [value, setValue] = React.useState<Dayjs | null>(
+    const [data, setData] = React.useState<Dayjs | null>(
         dayjs(date),
     );
 
-    const handleChange = (newValue: Dayjs | null) => {
-        setValue(newValue);
-        console.log(dayjs(value).format('MMMM DD YYYY')) //place this in the input to convert the date
-        console.log(value)
-    };
 
     return (
         <div className="App">
@@ -44,11 +39,11 @@ function App() {
                 <MobileDatePicker
                     label="Date mobile"
                     inputFormat="DD/MM/YYYY"
-                    value={value}
+                    value={data}
                     onChange={(newValue) => {
-                        setValue(newValue);
-                        console.log(dayjs(value).format('MMMM DD YYYY')) //place this in the input to convert the date
-                        console.log(value)
+                        setData(newValue);
+                        console.log(dayjs(data).format('MMMM DD YYYY')) //place this in the input to convert the date
+                        console.log(data)
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
