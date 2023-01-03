@@ -7,6 +7,7 @@ import Home from './Home'
 import Create from './components/CreateRecipe'
 import Menu from './components/MyMenu'
 import Recipe from './components/Recipe'
+import Update from './components/UpdateRecipe'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
@@ -20,6 +21,7 @@ root.render(
               <Route path="/createRecipe" element={<Create />} />
               <Route path="/myMenu" element={<Menu />} />
               <Route path="/recipe" element={<Recipe />}/>
+              <Route path="/update" element={<Update />}/>
               <Route path="/test" element={<App />}/>
           </Routes>
       </Router>

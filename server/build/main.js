@@ -133,7 +133,7 @@ app.post("/menus", (inRequest, inResponse) => __awaiter(void 0, void 0, void 0, 
         console.log(inRequest.body);
         const menusWorker = new Menus.Worker();
         const Menu = yield menusWorker.addMenu(inRequest.body);
-        inResponse.json(Menu); // for client acknowledgment and future use ( includesID)
+        inResponse.json(Menu); // for client acknowledgment and future use (includesID)
     }
     catch (inError) {
         inResponse.send(inError);
