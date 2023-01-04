@@ -6,6 +6,7 @@ import {CardActions, Card, CardContent, Typography, IconButton, Container, CardH
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Message from "./Message";
+import {Link} from "react-router-dom";
 function Menu(){
 
     const [menus, setMenus] = useState([]);
@@ -41,11 +42,20 @@ function Menu(){
                             </Typography>
                         </CardContent>
                         <CardActions disableSpacing style={{display: "flex", justifyContent: "flex-end"}}>
-                            <IconButton aria-label="open">
-                                <OpenInNewIcon/>
-                            </IconButton>
+                            <Link to={{
+                                pathname: '/recipe',
+                                search: '?id='+menu.recipeID
+                            }}>
+                                <IconButton aria-label="delete" size="large" sx={{
+                                    "&:hover": {
+                                        color: "green",
+                                    }
+                                }}>
+                                    <OpenInNewIcon/>
+                                </IconButton>
+                            </Link>
                             <IconButton aria-label="done">
-                                <TaskAltIcon/>
+                                <TaskAltIcon/> {/*add dialog to delete menu and project done*/}
                             </IconButton>
                         </CardActions>
                     </Card>
