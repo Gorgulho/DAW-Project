@@ -52,30 +52,23 @@ export default function SearchBar() {
 
     const [Recipes, setRecipes] = useState([])
     const [filterRecipes, setFilterRecipes] = useState([])
-    const [message, setMessage] = useState("")
 
     function filterRecipe() {
         setFilterRecipes(Recipes.filter(recipe => recipe.name.match(searchInput)))
-        if(filterRecipes.length === 0) setMessage("No Recipe matches...")
-        else setMessage("")
     }
 
     useEffect(() => {
-        if(Recipes.length > 0){
-            if (searchInput.length > 0) {
-                filterRecipe()
-            } else {
-                setMessage("No Recipe Matches")
-                setFilterRecipes([])
-            }
-        } else setMessage("No Recipes")
+        if (searchInput.length > 0) {
+            filterRecipe()
+        } else {
+            setFilterRecipes([])
+        }
     }, [searchInput])
 
     async function fetchRecipes() {
         const response = await fetch("http://localhost:8080/recipes")
         const json = await response.json()
         if (json.message) {
-            setMessage(json.message)
             setRecipes([])
         } else setRecipes(json);
     }
@@ -101,18 +94,14 @@ export default function SearchBar() {
                 />
             </Search>
 
-            {message ?
-                <div>
-                    {filterRecipes.map(fil =>
-                        <Box key={fil._id}>
-                            <Link to={{
-                                pathname: '/recipe',
-                                search: '?id=' + fil._id
-                            }}>{fil.name}</Link>
-                        </Box>
-                    )}
-                </div>
-                : <Box>{message}</Box>}
+            {filterRecipes.map(fil =>
+                <Box key={fil._id}>
+                    <Link to={{
+                        pathname: '/recipe',
+                        search: '?id=' + fil._id
+                    }}>{fil.name}</Link>
+                </Box>
+            )}
 
 
         </div>
