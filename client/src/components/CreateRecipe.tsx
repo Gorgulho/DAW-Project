@@ -5,7 +5,6 @@ import '../App.css';
 import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
 import Message from "./Message";
 
 function Create() {

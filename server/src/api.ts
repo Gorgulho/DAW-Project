@@ -56,7 +56,6 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         try {
             await recipesWorker.updateRecipe(inRequest.params.id, inRequest.body);
             inResponse.send({ message: "Updated" });
-            //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
         } catch (inError) {
             inResponse.send(inError);
         }

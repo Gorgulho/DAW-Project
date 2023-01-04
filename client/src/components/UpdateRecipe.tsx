@@ -6,7 +6,6 @@ import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import { useLocation } from 'react-router-dom';
-import Typography from "@mui/material/Typography";
 import Message from "./Message";
 
 function Update() {
