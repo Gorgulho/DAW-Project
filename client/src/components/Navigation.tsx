@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {Link} from 'react-router-dom'
+import SearchBar from "./SearchBar";
 
 const pages = [
     {
@@ -100,6 +101,9 @@ function Navigation() {
                                     </Link>
                                 </MenuItem>
                             ))}
+                            <MenuItem>
+                                <SearchBar/>
+                            </MenuItem>
                         </Menu>
                     </Box>
 
@@ -134,6 +138,9 @@ function Navigation() {
                                     {page.name}
                                 </Button></Link>
                         ))}
+                        <MenuItem>
+                            <SearchBar/>
+                        </MenuItem>
                     </Box>
 
                 </Toolbar>

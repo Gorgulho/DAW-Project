@@ -36,7 +36,6 @@ export class Worker {
                 }
             );
         });
-
     }
 
     public listRecipe(inID: string): Promise<IRecipe[]> {
@@ -51,7 +50,6 @@ export class Worker {
                 }
             );
         });
-
     }
 
     public addRecipe(inRecipe: IRecipe): Promise<IRecipe> {
