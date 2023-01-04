@@ -29,7 +29,7 @@ function Recipe() {
         <div>
             <Navigation/>
 
-            <Message message={message}/>
+            <Message message={message} handleClose={() => setMessage("")}/>
 
             {recipe.map(rec =>
             <Container key={rec._id} sx={{mt: 5}}>

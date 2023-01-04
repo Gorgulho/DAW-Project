@@ -92,9 +92,7 @@ function Recipes() {
         <div>
             <Message message={message} handleClose={() => setMessage("")}/>
 
-            <Container>
-                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardContent>
+            <div style={{display: "flex", justifyContent: "center",marginTop:5}}>
                         <OutlinedInput
                             startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
                             value={searchInput}
@@ -102,9 +100,7 @@ function Recipes() {
                                 setSearchInput(newValue.target.value);
                             }}
                         />
-                    </CardContent>
-                </Card>
-            </Container>
+            </div>
 
             <DeleteDialog
                 open={openDelete}

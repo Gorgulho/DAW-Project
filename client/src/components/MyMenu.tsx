@@ -59,7 +59,7 @@ function Menu() {
         <div className="App">
             <Navigation/>
 
-            <Message message={message}/>
+            <Message message={message} handleClose={() => setMessage("")}/>
 
             <DeleteDialogMenu
                 open={openDelete}

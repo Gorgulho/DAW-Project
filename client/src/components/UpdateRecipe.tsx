@@ -67,7 +67,7 @@ function Update() {
         <div className="App">
             <Navigation/>
 
-            <Message message={message}/>
+            <Message message={message} handleClose={() => setMessage("")}/>
 
 
             <Container component="form" style={{maxWidth: 600}}>
