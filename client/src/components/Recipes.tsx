@@ -7,13 +7,15 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Grid} from "@mui/material";
+import {Container, Grid, InputAdornment, OutlinedInput} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import DeleteDialog from "./DeleteDialog";
 import MenuDialog from "./MenuDialog";
 import {Link} from "react-router-dom";
 import Message from "./Message";
+import SearchIcon from "@mui/icons-material/Search";
+
 
 function Recipes() {
 
@@ -25,6 +27,9 @@ function Recipes() {
 
     const [openMenu, setOpenMenu] = React.useState(false);
     const [openDelete, setOpenDelete] = React.useState(false);
+
+    const [searchInput, setSearchInput] = useState("");
+    const [filterRecipes, setFilterRecipes] = useState([])
 
     const handleClickOpenDelete = (ID: string) => {
         setRecipeID(ID)
@@ -52,6 +57,10 @@ function Recipes() {
         }
     }
 
+    function filterRecipe() {
+        setFilterRecipes(recipes.filter(recipe => recipe.name.toLowerCase().match(searchInput.toLowerCase())))
+    }
+
     async function fetchRecipes() {
         const response = await fetch("http://localhost:8080/recipes")
         const json = await response.json()
@@ -59,17 +68,43 @@ function Recipes() {
         if (json.message) {
             setMessage(json.message)
             setRecipes([])
-        } else setRecipes(json);
+            setFilterRecipes([])
+        } else {
+            setRecipes(json);
+            setFilterRecipes(json)
+        }
     }
+
+    useEffect(() => {
+        if (searchInput.length > 0) {
+            filterRecipe()
+        } else {
+            setFilterRecipes(recipes)
+        }
+    }, [searchInput])
 
     useEffect(() => {
         fetchRecipes().catch(() => setMessage("Failed connecting to the server"));
     }, []);
 
+
     return (
         <div>
+            <Message message={message} handleClose={() => setMessage("")}/>
 
-            <Message message={message}/>
+            <Container>
+                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
+                    <CardContent>
+                        <OutlinedInput
+                            startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+                            value={searchInput}
+                            onChange={(newValue) => {
+                                setSearchInput(newValue.target.value);
+                            }}
+                        />
+                    </CardContent>
+                </Card>
+            </Container>
 
             <DeleteDialog
                 open={openDelete}
@@ -97,7 +132,7 @@ function Recipes() {
 
 
             <Grid container spacing={6}>
-                {recipes.map(recipe =>
+                {filterRecipes.map(recipe =>
                     <Grid item xs="auto" key={recipe._id}>
                         <Card sx={{maxWidth: 345, m: 5}}>
                             <CardHeader
