@@ -92,15 +92,19 @@ function Recipes() {
         <div>
             <Message message={message} handleClose={() => setMessage("")}/>
 
-            <div style={{display: "flex", justifyContent: "center",marginTop:5}}>
-                        <OutlinedInput
-                            startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
-                            value={searchInput}
-                            onChange={(newValue) => {
-                                setSearchInput(newValue.target.value);
-                            }}
-                        />
-            </div>
+            {recipes.length > 0 ?
+                <div style={{display: "flex", justifyContent: "center",marginTop:5}}>
+                    <OutlinedInput
+                        startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+                        value={searchInput}
+                        onChange={(newValue) => {
+                            setSearchInput(newValue.target.value);
+                        }}
+                    />
+                </div>
+                : null}
+
+
 
             <DeleteDialog
                 open={openDelete}
