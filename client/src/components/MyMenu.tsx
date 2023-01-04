@@ -7,28 +7,73 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Message from "./Message";
 import {Link} from "react-router-dom";
-function Menu(){
+import DeleteDialogMenu from "./DeleteDialogMenu";
 
+function Menu() {
+    const [menu, setMenu] = useState([]);
     const [menus, setMenus] = useState([]);
     const [message, setMessage] = useState("");
+
+    const [openDelete, setOpenDelete] = React.useState(false);
+    const [menuID, setMenuID] = useState("");
+
+    async function fetchMenu(ID: string) {
+        console.log(ID)
+        const response = await fetch("http://localhost:8080/menus/" + ID)
+        const json = await response.json()
+        if (!json.message) {
+            setMenu(json)
+            console.log(json)
+        }
+    }
+
+    async function deleteMenu(ID: string) {
+        if (ID !== "") {
+            await fetch("http://localhost:8080/menus/" + ID, {
+                method: "DELETE"
+            })
+        }
+    }
+
+    const handleClickOpenDelete = (ID: string) => {
+        setMenuID(ID)
+        fetchMenu(ID).catch(() => setMessage("Failed connecting to the server"));
+        setOpenDelete(true);
+    };
 
     async function fetchMenus() {
         const response = await fetch("http://localhost:8080/menus")
         const json = await response.json()
-        console.log(json)
-        if(json.message) setMessage(json.message)
+        if (json.message) {
+            setMessage(json.message)
+            setMenus([])
+        }
         else setMenus(json);
     }
 
     useEffect(() => {
-        fetchMenus().catch(() =>setMessage("Can't connect to the server"));
+        fetchMenus().catch(() => setMessage("Can't connect to the server"));
     }, []);
 
-    return(
+    return (
         <div className="App">
             <Navigation/>
 
             <Message message={message}/>
+
+            <DeleteDialogMenu
+                open={openDelete}
+                menu={menu}
+                handleClose={() => {
+                    setOpenDelete(false)
+                }} handleDelete={() => {
+                setOpenDelete(false)
+                deleteMenu(menuID).then(() => {
+                    fetchMenus().catch(() => setMessage("Failed connecting to the server"))
+                    setMessage("Menu was concluded successfully")
+                }).catch(() => setMessage("Failed connecting to the server"))
+            }}
+            />
 
             {menus.map(menu =>
                 <Container key={menu._id}>
@@ -44,7 +89,7 @@ function Menu(){
                         <CardActions disableSpacing style={{display: "flex", justifyContent: "flex-end"}}>
                             <Link to={{
                                 pathname: '/recipe',
-                                search: '?id='+menu.recipeID
+                                search: '?id=' + menu.recipeID
                             }}>
                                 <IconButton aria-label="delete" size="large" sx={{
                                     "&:hover": {
@@ -54,8 +99,12 @@ function Menu(){
                                     <OpenInNewIcon/>
                                 </IconButton>
                             </Link>
-                            <IconButton aria-label="done">
-                                <TaskAltIcon/> {/*add dialog to delete menu and project done*/}
+                            <IconButton aria-label="done" sx={{
+                                "&:hover": {
+                                    color: "green",
+                                }
+                            }} onClick={() => handleClickOpenDelete(menu._id)}>
+                                <TaskAltIcon/>
                             </IconButton>
                         </CardActions>
                     </Card>
@@ -65,4 +114,5 @@ function Menu(){
         </div>
     );
 }
+
 export default Menu;

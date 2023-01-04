@@ -16,7 +16,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props}  />;
 });
 
-export default function DeleteDialog(props) {
+export default function DeleteDialogMenu(props) {
 
     return (
         <Dialog
@@ -26,12 +26,12 @@ export default function DeleteDialog(props) {
             onClose={props.handleClose}
             aria-describedby="alert-dialog-slide-description"
         >
-            {props.recipe.map(re =>
+            {props.menu.map(me =>
 
-            <DialogContent key={re._id}>
+            <DialogContent key={me._id}>
                 <DialogTitle>{"Do you really want to delete this recipe?"}</DialogTitle>
                 <DialogContentText id="alert-dialog-slide-description">
-                    {re.name} will be removed from the data base.
+                    The menu at {me.date} will be marked has done and removed from the data base.
                     Do you want to continue?
                 </DialogContentText>
                 <DialogActions>

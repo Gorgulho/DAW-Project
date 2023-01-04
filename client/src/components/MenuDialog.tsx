@@ -10,14 +10,13 @@ import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 export default function MenuDialog(props){
 
     const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
-    const [recipe, setRecipe] = useState([])
 
     const [meal, setMeal] = useState("");
     const date = new Date();
@@ -41,26 +40,17 @@ export default function MenuDialog(props){
                 }).then(() => {
                     setData(dayjs(date))
                     setMeal("")
-                    props.handleAdd()
+                    props.handleMessageAdd()
+                    props.handleClose()
                 })
             } else {
-
+                alert("Fill all fields first")
             }
 
         } catch (error) {
             alert("Failed connecting to the server")
         }
     }
-
-    async function fetchRecipe(ID: string) {
-        const response = await fetch("http://localhost:8080/recipes/" + ID);
-        const json = await response.json();
-        if (!json.message) setRecipe(json);
-    }
-
-    useEffect(() => {
-        fetchRecipe(props.recipeID).catch(() => alert("Failed connecting"));
-    }, [props.open]);
 
     return (
         <Dialog
@@ -69,7 +59,7 @@ export default function MenuDialog(props){
             onClose={props.handleClose}
         >
 
-            {recipe.map(rec =>
+            {props.recipe.map(rec =>
                 <DialogContent key={rec._id}>
                     <DialogTitle>Add {rec.name} to a Menu</DialogTitle>
                     <DialogContentText>

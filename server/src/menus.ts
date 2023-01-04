@@ -39,6 +39,20 @@ export class Worker {
 
     }
 
+    public listMenu(inID: string): Promise<IMenu[]> {
+        return new Promise((inResolve, inReject) => {
+            this.db.find({_id: inID},
+                (inError: Error | null, inDocs: IMenu[]) => {
+                    if (inError) {
+                        inReject(inError);
+                    } else {
+                        inResolve(inDocs);
+                    }
+                }
+            );
+        });
+    }
+
     public addMenu(inMenu: IMenu): Promise<IMenu> {
         return new Promise((inResolve, inReject) => {
             this.db.insert(inMenu,

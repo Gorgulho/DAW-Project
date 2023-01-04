@@ -21,19 +21,28 @@ function Recipes() {
     const [message, setMessage] = useState("");
 
     const [recipeID, setRecipeID] = useState("");
+    const [recipeDialog, setRecipeDialog] = useState([])
 
     const [openMenu, setOpenMenu] = React.useState(false);
     const [openDelete, setOpenDelete] = React.useState(false);
 
     const handleClickOpenDelete = (ID: string) => {
         setRecipeID(ID)
+        fetchRecipe(ID).catch(() => setMessage("Failed connecting to the server"));
         setOpenDelete(true);
     };
 
     const handleClickOpenMenu = (ID: string) => {
         setRecipeID(ID)
+        fetchRecipe(ID).catch(() => setMessage("Failed connecting to the server"));
         setOpenMenu(true);
     };
+
+    async function fetchRecipe(ID: string) {
+        const response = await fetch("http://localhost:8080/recipes/" + ID)
+        const json = await response.json()
+        if (!json.message) setRecipeDialog(json)
+    }
 
     async function deleteRecipe(ID: string) {
         if (ID !== "") {
@@ -64,7 +73,7 @@ function Recipes() {
 
             <DeleteDialog
                 open={openDelete}
-                recipeID={recipeID}
+                recipe={recipeDialog}
                 handleClose={() => {
                     setOpenDelete(false)
                 }} handleDelete={() => {
@@ -78,11 +87,10 @@ function Recipes() {
 
             <MenuDialog
                 open={openMenu}
-                recipeID={recipeID}
+                recipe={recipeDialog}
                 handleClose={() => {
                     setOpenMenu(false)
-                }} handleAdd={() => {
-                    setOpenMenu(false)
+                }} handleMessageAdd={() => {
                     setMessage("Menu added successfully!")
                 }}
             />
@@ -108,7 +116,7 @@ function Recipes() {
 
                                 <Link to={{
                                     pathname: '/recipe',
-                                    search: '?id='+recipe._id
+                                    search: '?id=' + recipe._id
                                 }}>
                                     <IconButton aria-label="delete" size="large" sx={{
                                         "&:hover": {
@@ -121,9 +129,9 @@ function Recipes() {
 
                                 <Link style={{textDecoration: 'none'}} to={{
                                     pathname: '/update',
-                                    search: '?id='+recipe._id
+                                    search: '?id=' + recipe._id
                                 }}>
-                                    <Button variant="text" >Update</Button>
+                                    <Button variant="text">Update</Button>
                                 </Link>
                                 <IconButton aria-label="delete" size="large" sx={{
                                     "&:hover": {

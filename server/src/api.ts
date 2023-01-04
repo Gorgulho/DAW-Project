@@ -43,7 +43,6 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     app.delete("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             await recipesWorker.deleteRecipe(inRequest.params.id);
-
             await menusWorker.deleteMenuByRecipeID(inRequest.params.id)
             inResponse.send({ message: "deleted" });
         } catch (inError) {
@@ -87,6 +86,17 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     })
 
+    //Registro do path e do method para o endpoint que é utilizado para obter um menu pelo ID.
+    app.get("/menus/:id", async (inRequest: Request, inResponse: Response) => {
+        try {
+            const menu: IMenu[] = await menusWorker.listMenu(inRequest.params.id);
+            if (menu.length == 0) inResponse.send({ message: "No recipes in the Data Base corresponding to that ID" })
+            else inResponse.json(menu); // serialize object into JSON
+        } catch (inError) {
+            inResponse.send(inError);
+        }
+    });
+
     app.post("/menus", async (inRequest: Request, inResponse: Response) => {
         try {
             console.log(inRequest.body)
@@ -100,7 +110,7 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     app.delete("/menus/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             await menusWorker.deleteMenuByID(inRequest.params.id);
-            inResponse.send("ok");
+            inResponse.send({ message: "deleted" });
         } catch (inError) {
             inResponse.send(inError)
         }
