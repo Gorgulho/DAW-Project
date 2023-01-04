@@ -13,6 +13,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import DeleteDialog from "./DeleteDialog";
 import MenuDialog from "./MenuDialog";
 import {Link} from "react-router-dom";
+import Message from "./Message";
 
 function Recipes() {
 
@@ -53,22 +54,13 @@ function Recipes() {
     }
 
     useEffect(() => {
-        fetchRecipes().then((response) => console.log(response)).catch(() =>setMessage("Can't connect to the server"));
+        fetchRecipes().catch(() => setMessage("Failed connecting to the server"));
     }, []);
-
 
     return (
         <div>
 
-            {message ? <Container>
-                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardContent>
-                        <Typography variant="h5">
-                            {message}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Container> : null}
+            <Message message={message}/>
 
             <DeleteDialog
                 open={openDelete}
@@ -80,7 +72,7 @@ function Recipes() {
                 deleteRecipe(recipeID).then(() => {
                     fetchRecipes().then((response) => console.log(response));
                     setMessage("Recipe was deleted successfully")
-                })
+                }).catch(() => setMessage("Failed connecting to the server"))
             }}
             />
 
@@ -146,8 +138,6 @@ function Recipes() {
                     </Grid>
                 )}
 
-
-                {/**/}
             </Grid>
         </div>
     );

@@ -7,11 +7,12 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import { useLocation } from 'react-router-dom';
 import Typography from "@mui/material/Typography";
+import Message from "./Message";
 
 function Update() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const [id, setId] = useState(queryParams.get('id'));
+    const id = queryParams.get('id');
 
     const [message, setMessage] = useState("");
 
@@ -40,7 +41,7 @@ function Update() {
                 setMessage("Fill all fields first")
             }
         } catch (error) {
-            console.error(error)
+            setMessage("Failed connecting to the server")
         }
     }
 
@@ -51,7 +52,7 @@ function Update() {
     }
 
     useEffect(() => {
-        fetchRecipe(id)
+        fetchRecipe(id).catch(() => setMessage("Failed connecting to the server"))
     }, []);
 
     useEffect(() => {
@@ -66,15 +67,10 @@ function Update() {
     return (
         <div className="App">
             <Navigation/>
-            {message ? <Container>
-                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardContent>
-                        <Typography variant="h5">
-                            {message}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Container> : null}
+
+            <Message message={message}/>
+
+
             <Container component="form" style={{maxWidth: 600}}>
                 <Card sx={{m: 2}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
                     <CardHeader

@@ -21,14 +21,13 @@ export default function DeleteDialog(props) {
     const [recipe, setRecipe] = useState([])
 
     async function fetchRecipe(ID: string) {
-        console.log(ID)
         const response = await fetch("http://localhost:8080/recipes/" + ID)
         const json = await response.json()
         if (!json.message) setRecipe(json)
     }
 
     useEffect(() => {
-        fetchRecipe(props.recipeID).then((response) => console.log(response));
+        fetchRecipe(props.recipeID).catch(() => alert("Failed connecting to the server"));
     }, [props.open]);
 
     return (

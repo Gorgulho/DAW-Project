@@ -26,6 +26,4 @@ app.use(function(inRequest: Request, inResponse: Response, inNext : NextFunction
 
 registerRoutes(app, recipesWorker, menusWorker)
 
-
-
 app.listen(8080, () => console.log("listening"))

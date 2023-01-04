@@ -5,12 +5,13 @@ import '../App.css';
 import {CardActions, Card, CardContent, Typography, IconButton, Container, CardHeader} from "@mui/material";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Message from "./Message";
 function Menu(){
 
     const [menus, setMenus] = useState([]);
     const [message, setMessage] = useState("");
 
-    async function fetchData() {
+    async function fetchMenus() {
         const response = await fetch("http://localhost:8080/menus")
         const json = await response.json()
         console.log(json)
@@ -19,22 +20,14 @@ function Menu(){
     }
 
     useEffect(() => {
-        fetchData().catch(() =>setMessage("Can't connect to the server"));
+        fetchMenus().catch(() =>setMessage("Can't connect to the server"));
     }, []);
 
     return(
         <div className="App">
             <Navigation/>
 
-            {message ? <Container>
-                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardContent>
-                        <Typography variant="h5">
-                            {message}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Container> : null}
+            <Message message={message}/>
 
             {menus.map(menu =>
                 <Container key={menu._id}>

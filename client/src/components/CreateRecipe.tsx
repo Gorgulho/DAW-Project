@@ -6,6 +6,7 @@ import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
+import Message from "./Message";
 
 function Create() {
 
@@ -38,7 +39,7 @@ function Create() {
                 setMessage("Fill all fields first")
             }
         } catch (error) {
-            console.error(error)
+            setMessage("Failed connecting to the server")
         }
     }
 
@@ -46,15 +47,7 @@ function Create() {
         <div className="App">
             <Navigation/>
 
-            {message ? <Container>
-                <Card sx={{m: 3}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardContent>
-                        <Typography variant="h5">
-                            {message}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Container> : null}
+            <Message message={message}/>
 
             <Container component="form" style={{maxWidth: 600}}>
                 <Card sx={{m: 2}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>

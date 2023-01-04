@@ -69,7 +69,7 @@ export class Worker {
 
     public deleteMenuByRecipeID(inID: string): Promise<void> {
         return new Promise((inResolve, inReject) => {
-            this.db.remove({ recipeID: inID }, {},
+            this.db.remove({ recipeID: inID }, {multi:true},
                 (inError: Error | null, inNumRemoved: number) => {
                     if (inError) {
                         inReject(inError);

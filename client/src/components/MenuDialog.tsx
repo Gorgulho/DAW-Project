@@ -48,19 +48,18 @@ export default function MenuDialog(props){
             }
 
         } catch (error) {
-            console.error(error)
+            alert("Failed connecting to the server")
         }
     }
 
     async function fetchRecipe(ID: string) {
-        console.log(ID)
-        const response = await fetch("http://localhost:8080/recipes/" + ID)
-        const json = await response.json()
-        if (!json.message) setRecipe(json)
+        const response = await fetch("http://localhost:8080/recipes/" + ID);
+        const json = await response.json();
+        if (!json.message) setRecipe(json);
     }
 
     useEffect(() => {
-        fetchRecipe(props.recipeID).then((response) => console.log(response));
+        fetchRecipe(props.recipeID).catch(() => alert("Failed connecting"));
     }, [props.open]);
 
     return (

@@ -1,4 +1,3 @@
-
 import { Express, Request, Response } from "express";
 
 import * as Recipes from "./recipes";
@@ -44,8 +43,9 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     app.delete("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             await recipesWorker.deleteRecipe(inRequest.params.id);
+
+            await menusWorker.deleteMenuByRecipeID(inRequest.params.id)
             inResponse.send({ message: "deleted" });
-            //TODO: Add code to delete all the menus with this recipe (deleteByRecipeID)
         } catch (inError) {
             inResponse.send(inError);
         }
@@ -81,7 +81,7 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
                 return 0
             }) //order by date field
 
-            if (menus.length == 0) inResponse.send({ message: "No recipes in the Data Base" })
+            if (menus.length == 0) inResponse.send({ message: "No menus in the Data Base" })
             else inResponse.json(menus); // serialize object into JSON
         } catch (inError) {
             inResponse.send(inError);
