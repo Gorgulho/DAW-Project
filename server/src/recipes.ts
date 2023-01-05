@@ -4,8 +4,8 @@ const Datastore = require("nedb");
 
 
 /**
- * IRecipe interface that describes the Recipe, its necessary to Add, List, update and delete recipes to the DB.
- * When a Recipe is added to the DB, if there is no id detected, the NeDB add one automatically
+ * IRecipe interface that describes the Recipe, it's necessary to Add, List, update and delete recipes to the DB.
+ * When a Recipe is added to the DB, if there is no id detected, the NeDB will add one automatically
  * */
 export interface IRecipe {
     _id?: number,
@@ -74,7 +74,7 @@ export class Worker {
         });
     }
 
-    //Deletes a recipe by the id, returns a void promise
+    //Deletes a recipe by its id, returns a void promise
     public deleteRecipe(inID: string): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.remove({ _id: inID }, {},
@@ -89,7 +89,7 @@ export class Worker {
         });
     }
 
-    //Updates all fields of the recipe by the given id in inID with the data in fields
+    //Updates all fields of the recipe with the given id in inID with the data in fields
     public updateRecipe(inID: string, fields: IRecipe): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.update({ _id: inID }, {name:fields.name, description:fields.description, ingredients:fields.ingredients, instructions:fields.instructions},{},

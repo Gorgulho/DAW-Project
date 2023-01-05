@@ -3,8 +3,8 @@ import Nedb from "nedb";
 const Datastore = require("nedb");
 
 /**
- * IMenu interface that describes the Menu, its necessary to Add, List and delete menus to the DB.
- * When a Menu is added to the DB, if there is no id detected, the NeDB add one automatically
+ * IMenu interface that describes the Menu, it's necessary to Add, List and delete menus to the DB.
+ * When a Menu is added to the DB, if there is no id detected, the NeDB will add one automatically
  * */
 export interface IMenu {
     _id?: number,
@@ -28,7 +28,7 @@ export class Worker {
         });
     }
 
-    //Get all entry's in the DB, returns a promise with an array with all Menus
+    //Get all entry in the DB, returns a promise with an array with all Menus
     public listMenus(): Promise<IMenu[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({},
@@ -74,7 +74,7 @@ export class Worker {
         });
     }
 
-    //Deletes a menu by the id, returns a void promise
+    //Deletes a menu by its id, returns a void promise
     public deleteMenuByID(inID: string): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.remove({ _id: inID }, {},

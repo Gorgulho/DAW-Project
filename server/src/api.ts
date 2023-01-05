@@ -33,7 +33,7 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
 
     /**
      * Handles the /recipes end point, returning in the response all recipes in the database.
-     * In case there is no recipes in the DB, returns a message informing the user.
+     * In case there are no recipes in the DB, returns a message informing the user.
      * */
     app.get("/recipes", async (inRequest: Request, inResponse: Response) => {
         try {
@@ -46,7 +46,7 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     });
 
     /**
-     * Handles the /recipes/:id end point, returning in the response the recipe that matches with the id given in the database.
+     * Handles the /recipes/:id end point, returning in the response the recipe that matches the id given in the database.
      * In case there is no match in the DB, returns a message informing the user.
      * */
     app.get("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
@@ -60,8 +60,8 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     });
 
     /**
-     * Handles the /recipes end point, will recipe data in the request body and create a new recipe entry in the database.
-     * Returns the entry added for the user acknowledgement
+     * Handles the /recipes end point, will receive data in the request body and create a new recipe entry in the database.
+     * Returns the entry added for the user´s acknowledgement
      * */
     app.post("/recipes", async (inRequest: Request, inResponse: Response) => {
         try {
@@ -87,8 +87,8 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     });
 
     /**
-     * Handles the /recipes end point,updating the DB entry with that id, return in the response a message informing the user that was updated.
-     * In case there is no recipes in the DB, returns a message informing the user.
+     * Handles the /recipes end point,updating the DB entry with that id, returning in the response a message informing the user that the recipe was updated.
+     * In case there are no recipes in the DB, returns a message informing the user.
      * */
     app.put("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         try {
@@ -102,8 +102,8 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     //Menu end points
 
     /**
-     * Handles the /menus end point, returning in the response all menus in the database ordered by the date.
-     * In case there is no menus in the DB, returns a message informing the user.
+     * Handles the /menus end point, returning in the response all menus in the database ordered by date.
+     * In case there are no menus in the DB, returns a message informing the user.
      * */
     app.get("/menus", async (inRequest: Request, inResponse: Response) => {
         try {
@@ -130,7 +130,7 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     })
 
     /**
-     * Handles the /menus/:id end point, returning in the response the menu that matches with the id given in the database.
+     * Handles the /menus/:id end point, returning in the response the menu that matches the id given in the database.
      * In case there is no match in the DB, returns a message informing the user.
      * */
     app.get("/menus/:id", async (inRequest: Request, inResponse: Response) => {
@@ -144,8 +144,8 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
     });
 
     /**
-     * Handles the /menus end point, will recipe data in the request body and create a new menu entry in the database.
-     * Returns the entry add for the user acknowledgement
+     * Handles the /menus end point, will receive data in the request body and create a new menu entry in the database.
+     * Returns the entry add for the user´s acknowledgement
      * */
     app.post("/menus", async (inRequest: Request, inResponse: Response) => {
         try {
