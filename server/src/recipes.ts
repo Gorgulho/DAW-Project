@@ -29,6 +29,7 @@ export class Worker {
         });
     }
 
+    //Get all entry's in the DB, returns a promise with an array with all Recipes
     public listRecipes(): Promise<IRecipe[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({},
@@ -43,6 +44,7 @@ export class Worker {
         });
     }
 
+    //Search in the DB for an entry with a specific id, returns a promise with the result of the query
     public listRecipe(inID: string): Promise<IRecipe[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({_id: inID},
@@ -57,6 +59,7 @@ export class Worker {
         });
     }
 
+    //Adds a new recipe entry with the data in inRecipe, returns a promise with the entry added
     public addRecipe(inRecipe: IRecipe): Promise<IRecipe> {
         return new Promise((inResolve, inReject) => {
             this.db.insert(inRecipe,
@@ -71,6 +74,7 @@ export class Worker {
         });
     }
 
+    //Deletes a recipe by the id, returns a void promise
     public deleteRecipe(inID: string): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.remove({ _id: inID }, {},
@@ -85,6 +89,7 @@ export class Worker {
         });
     }
 
+    //Updates all fields of the recipe by the given id in inID with the data in fields
     public updateRecipe(inID: string, fields: IRecipe): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.update({ _id: inID }, {name:fields.name, description:fields.description, ingredients:fields.ingredients, instructions:fields.instructions},{},

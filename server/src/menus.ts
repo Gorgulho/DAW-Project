@@ -28,7 +28,7 @@ export class Worker {
         });
     }
 
-    //Returns a promise with an array with all Menus
+    //Get all entry's in the DB, returns a promise with an array with all Menus
     public listMenus(): Promise<IMenu[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({},
@@ -44,7 +44,7 @@ export class Worker {
 
     }
 
-    //Returns a promise with an array with all Menus corresponding to the id
+    //Search in the DB for an entry with a specific id, returns a promise with the result of the query
     public listMenu(inID: string): Promise<IMenu[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({_id: inID},
@@ -59,7 +59,7 @@ export class Worker {
         });
     }
 
-    //Adds a menu with the values
+    //Adds a new menu entry with the data in inMenu, returns a promise with the entry added
     public addMenu(inMenu: IMenu): Promise<IMenu> {
         return new Promise((inResolve, inReject) => {
             this.db.insert(inMenu,
