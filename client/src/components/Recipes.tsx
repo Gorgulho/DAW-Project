@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom";
+//MUI components
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -7,15 +9,16 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Container, Grid, InputAdornment, OutlinedInput} from "@mui/material";
+import {Grid, InputAdornment, OutlinedInput} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import SearchIcon from "@mui/icons-material/Search";
+//Components
 import DeleteDialog from "./DeleteDialog";
 import MenuDialog from "./MenuDialog";
-import {Link} from "react-router-dom";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
 import Message from "./Message";
-import SearchIcon from "@mui/icons-material/Search";
-
 
 function Recipes() {
 
@@ -90,10 +93,12 @@ function Recipes() {
 
     return (
         <div>
+            <Navigation/>
+
             <Message message={message} handleClose={() => setMessage("")}/>
 
             {recipes.length > 0 ?
-                <div style={{display: "flex", justifyContent: "center",marginTop:5}}>
+                <div style={{display: "flex", justifyContent: "center", marginTop: 5}}>
                     <OutlinedInput
                         startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
                         value={searchInput}
@@ -103,7 +108,6 @@ function Recipes() {
                     />
                 </div>
                 : null}
-
 
 
             <DeleteDialog
@@ -126,8 +130,8 @@ function Recipes() {
                 handleClose={() => {
                     setOpenMenu(false)
                 }} handleMessageAdd={() => {
-                    setMessage("Menu added successfully!")
-                }}
+                setMessage("Menu added successfully!")
+            }}
             />
 
 
@@ -182,6 +186,8 @@ function Recipes() {
                 )}
 
             </Grid>
+
+            <Footer/>
         </div>
     );
 }

@@ -1,9 +1,11 @@
+import React, {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
+//MUI components
+import {Card, CardContent, CardHeader, Container, Typography} from "@mui/material";
+//Components
+import Message from "./Message";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-import React, {useEffect, useState} from "react";
-import {Card, CardContent, CardHeader, Container, Typography} from "@mui/material";
-import {useLocation} from "react-router-dom";
-import Message from "./Message";
 
 function Recipe() {
     const location = useLocation();

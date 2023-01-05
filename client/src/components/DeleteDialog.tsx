@@ -1,4 +1,5 @@
 import React from 'react';
+//MUI components
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import {DialogContentText, Slide} from "@mui/material";

@@ -5,8 +5,36 @@ import { IRecipe } from "./recipes";
 import * as Menus from "./menus";
 import { IMenu } from "./menus";
 
+/**
+ * All the end points registered in this server are:
+ *  http://localhost:8080/recipes
+ *      METHOD: GET
+ *  http://localhost:8080/recipes/:id
+ *      METHOD: GET
+ *  http://localhost:8080/recipes
+ *      METHOD: POST
+ *  http://localhost:8080/recipes/:id
+ *      METHOD: DELETE
+ *  http://localhost:8080/recipes/:id
+ *      METHOD: PUT
+ *  http://localhost:8080/menus
+ *      METHOD: GET
+ *  http://localhost:8080/menus/:id
+ *      METHOD: GET
+ *  http://localhost:8080/menus
+ *      METHOD: POST
+ *  http://localhost:8080/menus/:id
+ *      METHOD: DELETE
+ * */
+
 export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menusWorker: Menus.Worker) {
-    //Registro do path e do method para o endpoint que é utilizado para obter a lista de receitas.
+
+    //Recipe end points
+
+    /**
+     * Handles the /recipes end point, returning in the response all recipes in the database.
+     * In case there is no recipes in the DB, returns a message informing the user.
+     * */
     app.get("/recipes", async (inRequest: Request, inResponse: Response) => {
         try {
             const recipes: IRecipe[] = await recipesWorker.listRecipes();
@@ -17,7 +45,10 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     });
 
-    //Registro do path e do method para o endpoint que é utilizado para obter uma receita pelo ID.
+    /**
+     * Handles the /recipes/:id end point, returning in the response the recipe that matches with the id given in the database.
+     * In case there is no match in the DB, returns a message informing the user.
+     * */
     app.get("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             const recipes: IRecipe[] = await recipesWorker.listRecipe(inRequest.params.id);
@@ -28,7 +59,10 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     });
 
-    //Registro do path e do method para o endpoint que é utilizado para adicionar uma receita à lista de receitas.
+    /**
+     * Handles the /recipes end point, will recipe data in the request body and create a new recipe entry in the database.
+     * Returns the entry added for the user acknowledgement
+     * */
     app.post("/recipes", async (inRequest: Request, inResponse: Response) => {
         try {
             console.log(inRequest.body)
@@ -39,18 +73,23 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     });
 
-    //Registro do path e do method para o endpoint que é utilizado para eliminar uma receita em especifico.
+    /**
+     * Handles the /recipes/:id end point, deleting the DB entry with that id, return in the response a message informing the user that the entry was deleted.
+     * */
     app.delete("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             await recipesWorker.deleteRecipe(inRequest.params.id);
             await menusWorker.deleteMenuByRecipeID(inRequest.params.id)
-            inResponse.send({ message: "deleted" });
+            inResponse.send({ message: "Deleted" });
         } catch (inError) {
             inResponse.send(inError);
         }
     });
 
-    //Registro do path e do method para o endpoint que é utilizado para atualizar uma receita em especifico.
+    /**
+     * Handles the /recipes end point,updating the DB entry with that id, return in the response a message informing the user that was updated.
+     * In case there is no recipes in the DB, returns a message informing the user.
+     * */
     app.put("/recipes/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             await recipesWorker.updateRecipe(inRequest.params.id, inRequest.body);
@@ -62,6 +101,10 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
 
     //Menu end points
 
+    /**
+     * Handles the /menus end point, returning in the response all menus in the database ordered by the date.
+     * In case there is no menus in the DB, returns a message informing the user.
+     * */
     app.get("/menus", async (inRequest: Request, inResponse: Response) => {
         try {
             const menus: IMenu[] = await menusWorker.listMenus();
@@ -86,7 +129,10 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     })
 
-    //Registro do path e do method para o endpoint que é utilizado para obter um menu pelo ID.
+    /**
+     * Handles the /menus/:id end point, returning in the response the menu that matches with the id given in the database.
+     * In case there is no match in the DB, returns a message informing the user.
+     * */
     app.get("/menus/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             const menu: IMenu[] = await menusWorker.listMenu(inRequest.params.id);
@@ -97,6 +143,10 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     });
 
+    /**
+     * Handles the /menus end point, will recipe data in the request body and create a new menu entry in the database.
+     * Returns the entry add for the user acknowledgement
+     * */
     app.post("/menus", async (inRequest: Request, inResponse: Response) => {
         try {
             console.log(inRequest.body)
@@ -107,6 +157,9 @@ export function registerRoutes(app: Express, recipesWorker: Recipes.Worker, menu
         }
     });
 
+    /**
+     * Handles the /menus/:id end point, deleting the DB entry with that id, return in the response a message informing the user that the entry was deleted.
+     * */
     app.delete("/menus/:id", async (inRequest: Request, inResponse: Response) => {
         try {
             await menusWorker.deleteMenuByID(inRequest.params.id);

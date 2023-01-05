@@ -2,8 +2,10 @@ import * as path from "path";
 const Datastore = require("nedb");
 
 
-//IContact é uma interface que descreve um contacto e que é necessária para adicionar, listar e eleiminar operações de contactos.
-//Quando se adiciona um contacto, caso não seja identificado um id, o NeDB irá associar um id automaticamente.
+/**
+ * IRecipe interface that describes the Recipe, its necessary to Add, List, update and delete recipes to the DB.
+ * When a Recipe is added to the DB, if there is no id detected, the NeDB add one automatically
+ * */
 export interface IRecipe {
     _id?: number,
     name: string,
@@ -12,7 +14,11 @@ export interface IRecipe {
     ingredients: string
 }
 
-
+/**
+ * Worker class that contains all functions needed to perform all the required DB actions.
+ * NeDB is synchronous, that's why all functions are creating promises,so that the application continues to run while
+ * the request is executed, otherwise the application would block until the request is completed
+ * */
 export class Worker {
     private db: Nedb;
     constructor() {
@@ -22,8 +28,6 @@ export class Worker {
         });
     }
 
-    //NeDB é sincrono, logo necessitamos de criar uma promise de forma a que a aplicação continue a correr
-    //normalmente enquanto o pedido é executado, caso contrário, a aplicação iria bloquear até o pedido ser concluido
     public listRecipes(): Promise<IRecipe[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({},

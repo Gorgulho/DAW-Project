@@ -1,13 +1,14 @@
-import Navigation from "./Navigation";
-import Footer from "./Footer";
+import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import '../App.css';
+//MUI components
 import {CardActions, Card, CardContent, Typography, IconButton, Container, CardHeader} from "@mui/material";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+//Components
 import Message from "./Message";
-import {Link} from "react-router-dom";
 import DeleteDialogMenu from "./DeleteDialogMenu";
+import Navigation from "./Navigation";
+import Footer from "./Footer";
 
 function Menu() {
     const [menu, setMenu] = useState([]);

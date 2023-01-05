@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
+//MUI components
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,7 +12,7 @@ import FoodBankRoundedIcon from '@mui/icons-material/FoodBankRounded';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import {Link} from 'react-router-dom'
+
 
 const pages = [
     {
@@ -26,8 +28,6 @@ const pages = [
         path: "/createRecipe"
     }
 ];
-
-
 function Navigation() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 

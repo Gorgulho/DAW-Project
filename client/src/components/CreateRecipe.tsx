@@ -1,12 +1,12 @@
-import Navigation from './Navigation'
-import Footer from './Footer'
 import React, {useState} from "react";
-import '../App.css';
+//MUI components
 import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
+//Components
 import Message from "./Message";
-
+import Navigation from './Navigation'
+import Footer from './Footer'
 function Create() {
 
     const [message, setMessage] = useState("");

@@ -1,12 +1,13 @@
-import Navigation from './Navigation'
-import Footer from './Footer'
 import React, {useEffect, useState} from "react";
-import '../App.css';
+import { useLocation } from 'react-router-dom';
+//MUI components
 import {Button, Card, Container, FormControl, TextField} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import { useLocation } from 'react-router-dom';
+//Components
 import Message from "./Message";
+import Navigation from './Navigation'
+import Footer from './Footer'
 
 function Update() {
     const location = useLocation();
