@@ -10,10 +10,12 @@ import Navigation from './Navigation'
 import Footer from './Footer'
 
 function Update() {
+    //Receives the data received from the URL, via the search parameters
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get('id');
 
+    //All the states used in this component
     const [message, setMessage] = useState("");
 
     const [name, setName] = useState("");
@@ -23,6 +25,7 @@ function Update() {
 
     const [recipe, setRecipe] = useState([]);
 
+    //Create a request To update the recipe with the ID argument. Send the data to update through the request body
     const updateRecipe = async (ID : string) => {
         try {
             if(name !== "" && description !== "" && ingredients !== "" && instructions !== "") {
@@ -45,12 +48,17 @@ function Update() {
         }
     }
 
+    //Requests a specific recipe from the server with the ID argument
     async function fetchRecipe(ID: string) {
         const response = await fetch("http://localhost:8080/recipes/" + ID)
         const json = await response.json()
         if (!json.message) setRecipe(json)
     }
 
+    /**
+     * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
+     * In this case, the 'useEffect()' only executes the arrow after the main component mount, only executing one time.
+     * */
     useEffect(() => {
         fetchRecipe(id).catch(() => setMessage("Failed connecting to the server"))
     }, []);

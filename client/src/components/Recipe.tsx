@@ -8,14 +8,16 @@ import Navigation from "./Navigation";
 import Footer from "./Footer";
 
 function Recipe() {
+    //Receives the data received from the URL, via the search parameters
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get('id');
 
+    //All the states used in this component
     const [message, setMessage] = useState("");
-
     const [recipe, setRecipe] = useState([]);
 
+    //Requests a specific recipe from the server with the ID argument
     async function fetchRecipe(ID: string) {
         const response = await fetch("http://localhost:8080/recipes/" + ID)
         const json = await response.json()
@@ -23,6 +25,10 @@ function Recipe() {
         else setRecipe(json)
     }
 
+    /**
+     * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
+     * In this case, the 'useEffect()' only executes the arrow after the main component mount, only executing one time.
+     * */
     useEffect(() => {
         fetchRecipe(id).catch(() => setMessage("Failed connecting to the server"))
     }, []);

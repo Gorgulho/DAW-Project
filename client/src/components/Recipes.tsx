@@ -22,6 +22,7 @@ import Message from "./Message";
 
 function Recipes() {
 
+    //All the states used in this component
     const [recipes, setRecipes] = useState([]);
     const [message, setMessage] = useState("");
 
@@ -34,24 +35,28 @@ function Recipes() {
     const [searchInput, setSearchInput] = useState("");
     const [filterRecipes, setFilterRecipes] = useState([])
 
+    //Handles the open of the DeleteDialog component
     const handleClickOpenDelete = (ID: string) => {
         setRecipeID(ID)
         fetchRecipe(ID).catch(() => setMessage("Failed connecting to the server"));
         setOpenDelete(true);
     };
 
+    //Handles the open of the MenuDialog component
     const handleClickOpenMenu = (ID: string) => {
         setRecipeID(ID)
         fetchRecipe(ID).catch(() => setMessage("Failed connecting to the server"));
         setOpenMenu(true);
     };
 
+    //Requests a specific recipe from the server with the ID argument
     async function fetchRecipe(ID: string) {
         const response = await fetch("http://localhost:8080/recipes/" + ID)
         const json = await response.json()
         if (!json.message) setRecipeDialog(json)
     }
 
+    //Requests the server to delete a specific recipe with the ID argument
     async function deleteRecipe(ID: string) {
         if (ID !== "") {
             await fetch("http://localhost:8080/recipes/" + ID, {
@@ -60,10 +65,13 @@ function Recipes() {
         }
     }
 
+    //Applies a filter in all the recipes, to filter with what is written in the searchInput.
+    //All letters are changed to lower case to remove the key-sensitive search.
     function filterRecipe() {
         setFilterRecipes(recipes.filter(recipe => recipe.name.toLowerCase().match(searchInput.toLowerCase())))
     }
 
+    //Requests all the recipes from the server, setting the states needed for the rest of the page
     async function fetchRecipes() {
         const response = await fetch("http://localhost:8080/recipes")
         const json = await response.json()
@@ -78,6 +86,10 @@ function Recipes() {
         }
     }
 
+    /**
+     * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
+     * In this case, the 'useEffect()' is looking for changes in a specific component 'searchInput' running the arrow function inside every time the component has some changes.
+     * */
     useEffect(() => {
         if (searchInput.length > 0) {
             filterRecipe()
@@ -86,6 +98,10 @@ function Recipes() {
         }
     }, [searchInput])
 
+    /**
+     * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
+     * In this case, the 'useEffect()' only executes the arrow after the main component mount, only executing one time.
+     * */
     useEffect(() => {
         fetchRecipes().catch(() => setMessage("Failed connecting to the server"));
     }, []);
@@ -97,6 +113,7 @@ function Recipes() {
 
             <Message message={message} handleClose={() => setMessage("")}/>
 
+            {/*Search bar*/}
             {recipes.length > 0 ?
                 <div style={{display: "flex", justifyContent: "center", marginTop: 5}}>
                     <OutlinedInput
@@ -134,7 +151,7 @@ function Recipes() {
             }}
             />
 
-
+            {/*Display all the recipes*/}
             <Grid container spacing={6}>
                 {filterRecipes.map(recipe =>
                     <Grid item xs="auto" key={recipe._id}>
