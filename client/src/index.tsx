@@ -15,6 +15,8 @@ const root = ReactDOM.createRoot(
 /**
  * Creation of all the Routes needed with the help of the react-router-dom.
  * The react-router-dom is a popular library that provides routing functionality for React applications.
+ * React-router-dom is also responsible for all the Link tags in the different components, and they are responsible
+ * to redirect the user through all the different pages from the web page.
  * */
 root.render(
   <React.StrictMode>
