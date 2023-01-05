@@ -28,6 +28,7 @@ export class Worker {
         });
     }
 
+    //Returns a promise with an array with all Menus
     public listMenus(): Promise<IMenu[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({},
@@ -43,6 +44,7 @@ export class Worker {
 
     }
 
+    //Returns a promise with an array with all Menus corresponding to the id
     public listMenu(inID: string): Promise<IMenu[]> {
         return new Promise((inResolve, inReject) => {
             this.db.find({_id: inID},
@@ -57,6 +59,7 @@ export class Worker {
         });
     }
 
+    //Adds a menu with the values
     public addMenu(inMenu: IMenu): Promise<IMenu> {
         return new Promise((inResolve, inReject) => {
             this.db.insert(inMenu,
@@ -71,6 +74,7 @@ export class Worker {
         });
     }
 
+    //Deletes a menu by the id, returns a void promise
     public deleteMenuByID(inID: string): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.remove({ _id: inID }, {},
@@ -85,6 +89,7 @@ export class Worker {
         });
     }
 
+    //Deletes all menus that contain a specific recipeID, returns a void promise
     public deleteMenuByRecipeID(inID: string): Promise<void> {
         return new Promise((inResolve, inReject) => {
             this.db.remove({ recipeID: inID }, {multi:true},

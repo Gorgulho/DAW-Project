@@ -12,6 +12,7 @@ const app : Express = express() ;
 //DB constructors initialized
 const recipesWorker: Recipes.Worker = new Recipes.Worker();
 const menusWorker: Menus.Worker = new Menus.Worker();
+
 /**
  * Adding a piece of middleware to the Express app.
  * It allows the app to parse incoming request bodies that are in the JSON format.
