@@ -73,7 +73,7 @@ function Update() {
     }, [recipe])
 
     return (
-        <div className="App">
+        <div>
             <Navigation/>
 
             <Message message={message} handleClose={() => setMessage("")}/>
@@ -155,7 +155,6 @@ function Update() {
             <Footer/>
         </div>
     )
-        ;
 }
 
 export default Update;

@@ -65,7 +65,7 @@ function Menu() {
     }, []);
 
     return (
-        <div className="App">
+        <div>
             <Navigation/>
 
             <Message message={message} handleClose={() => setMessage("")}/>
