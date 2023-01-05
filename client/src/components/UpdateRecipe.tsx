@@ -81,7 +81,7 @@ function Update() {
 
             <Container component="form" style={{maxWidth: 600}}>
                 <Card sx={{m: 2}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardHeader
+                    <CardHeader sx={{textAlign:"center"}}
                         title="Write your alterations"
                     />
                     <CardContent>

@@ -43,14 +43,14 @@ function Create() {
     }
 
     return (
-        <div className="App">
+        <div>
             <Navigation/>
 
             <Message message={message} handleClose={() => setMessage("")}/>
 
             <Container component="form" style={{maxWidth: 600}}>
                 <Card sx={{m: 2}} style={{boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)"}}>
-                    <CardHeader
+                    <CardHeader sx={{textAlign:"center"}}
                         title="Write your recipe here"
                     />
                     <CardContent>

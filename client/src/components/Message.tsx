@@ -23,7 +23,7 @@ export default function Message(props) {
                             <CloseIcon sx={{ fontSize: "18px" }}/>
                         </IconButton>
                     </CardActions>
-                    <CardContent sx={{pt:0}}>
+                    <CardContent sx={{pt:0, textAlign:"center"}}>
                         <Typography variant="h5">
                             {props.message}
                         </Typography>
