@@ -27,7 +27,7 @@ function Recipe() {
 
     /**
      * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
-     * In this case, the 'useEffect()' only executes the arrow after the main component mount, only executing one time.
+     * In this case, the 'useEffect()' only executes the arrow function after the main component mount, only executing one time.
      * */
     useEffect(() => {
         fetchRecipe(id).catch(() => setMessage("Failed connecting to the server"))

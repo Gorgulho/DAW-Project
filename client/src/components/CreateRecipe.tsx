@@ -16,6 +16,10 @@ function Create() {
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState("");
 
+    /**
+     * Request the server to add a recipe. Send the data to create the recipe through the request body.
+     * After sending the request and the server responded with a positive answer, clear all the states from the form, so the user can create another recipe immediately.
+     */
     const addRecipe = async () => {
         try {
             if(name !== "" && description !== "" && ingredients !== "" && instructions !== "") {

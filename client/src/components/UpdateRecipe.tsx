@@ -25,7 +25,7 @@ function Update() {
 
     const [recipe, setRecipe] = useState([]);
 
-    //Create a request To update the recipe with the ID argument. Send the data to update through the request body
+    //Request the server to update the recipe with the ID argument. Send the data to update through the request body.
     const updateRecipe = async (ID : string) => {
         try {
             if(name !== "" && description !== "" && ingredients !== "" && instructions !== "") {
@@ -57,7 +57,7 @@ function Update() {
 
     /**
      * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
-     * In this case, the 'useEffect()' only executes the arrow after the main component mount, only executing one time.
+     * In this case, the 'useEffect()' only executes the arrow function after the main component mount, only executing one time.
      * */
     useEffect(() => {
         fetchRecipe(id).catch(() => setMessage("Failed connecting to the server"))

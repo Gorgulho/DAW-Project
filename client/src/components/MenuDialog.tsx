@@ -13,7 +13,10 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 
-
+/**
+ * This function receives some stats and functions through props.
+ * Every state and function is declared in the component that calls this component.
+ * */
 export default function MenuDialog(props){
 
     const theme = useTheme();
@@ -27,6 +30,11 @@ export default function MenuDialog(props){
         dayjs(date),
     );
 
+    //
+    /**
+     * Request the server to add a menu with the recipeID and recipeName argument. Send the data to create the menu through the request body.
+     * After sending the request and the server responded with a positive answer, the dialog is closed.
+     * */
     async function addMenu(recipeID: string, recipeName: string) {
         try {
             if (meal !== "") {

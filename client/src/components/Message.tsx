@@ -7,6 +7,10 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@mui/material/IconButton";
 
+/**
+ * This function receives some stats and functions through props.
+ * Every state and function is declared in the component that calls this component.
+ * */
 export default function Message(props) {
 
     return(

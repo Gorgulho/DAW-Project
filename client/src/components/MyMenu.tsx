@@ -18,6 +18,7 @@ function Menu() {
     const [openDelete, setOpenDelete] = React.useState(false);
     const [menuID, setMenuID] = useState("");
 
+    //Requests a specific menu from the server with the ID argument
     async function fetchMenu(ID: string) {
         console.log(ID)
         const response = await fetch("http://localhost:8080/menus/" + ID)
@@ -28,6 +29,7 @@ function Menu() {
         }
     }
 
+    //Requests the server to delete a specific menu with the ID argument
     async function deleteMenu(ID: string) {
         if (ID !== "") {
             await fetch("http://localhost:8080/menus/" + ID, {
@@ -36,12 +38,14 @@ function Menu() {
         }
     }
 
+    //Handles the open of the DeleteDialogMenu component
     const handleClickOpenDelete = (ID: string) => {
         setMenuID(ID)
         fetchMenu(ID).catch(() => setMessage("Failed connecting to the server"));
         setOpenDelete(true);
     };
 
+    //Requests all the menus from the server, setting the states needed for the rest of the page.
     async function fetchMenus() {
         const response = await fetch("http://localhost:8080/menus")
         const json = await response.json()
@@ -52,6 +56,10 @@ function Menu() {
         else setMenus(json);
     }
 
+    /**
+     * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
+     * In this case, the 'useEffect()' only executes the arrow function after the main component mount, only executing one time.
+     * */
     useEffect(() => {
         fetchMenus().catch(() => setMessage("Can't connect to the server"));
     }, []);

@@ -17,6 +17,11 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props}  />;
 });
 
+/**
+ * This function receives some stats and functions through props.
+ * Every state and function is declared in the component that calls this component.
+ * */
+
 export default function DeleteDialogMenu(props) {
 
     return (

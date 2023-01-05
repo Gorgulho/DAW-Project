@@ -71,7 +71,7 @@ function Recipes() {
         setFilterRecipes(recipes.filter(recipe => recipe.name.toLowerCase().match(searchInput.toLowerCase())))
     }
 
-    //Requests all the recipes from the server, setting the states needed for the rest of the page
+    //Requests all the recipes from the server, setting the states needed for the rest of the page.
     async function fetchRecipes() {
         const response = await fetch("http://localhost:8080/recipes")
         const json = await response.json()
@@ -100,7 +100,7 @@ function Recipes() {
 
     /**
      * This function it's based in React 'componentDidMount()' that will invoke the functions inside after a component is mounted.
-     * In this case, the 'useEffect()' only executes the arrow after the main component mount, only executing one time.
+     * In this case, the 'useEffect()' only executes the arrow function after the main component mount, only executing one time.
      * */
     useEffect(() => {
         fetchRecipes().catch(() => setMessage("Failed connecting to the server"));
