@@ -67,7 +67,6 @@ function Create() {
                                     value={name}
                                     onChange={(newValue) => {
                                         setName(newValue.target.value);
-                                        console.log(name)
                                     }}
                                     required
                                     label="Title"
@@ -82,7 +81,6 @@ function Create() {
                                     value={description}
                                     onChange={(newValue) => {
                                         setDescription(newValue.target.value);
-                                        console.log(description)
                                     }}
                                     required
                                     label="Description"
@@ -97,7 +95,6 @@ function Create() {
                                     value={ingredients}
                                     onChange={(newValue) => {
                                         setIngredients(newValue.target.value);
-                                        console.log(ingredients)
                                     }}
                                     required
                                     label="Ingredients"
@@ -111,7 +108,6 @@ function Create() {
                                     value={instructions}
                                     onChange={(newValue) => {
                                         setInstructions(newValue.target.value);
-                                        console.log(instructions)
                                     }}
                                     required
                                     label="Instructions"

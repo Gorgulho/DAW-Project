@@ -113,8 +113,6 @@ export default function MenuDialog(props){
                                     value={data}
                                     onChange={(newValue) => {
                                         setData(newValue);
-                                        console.log(dayjs(data).format('MMMM DD YYYY')) //place this in the input to convert the date
-                                        console.log(data)
                                     }}
                                     renderInput={(params) => <TextField {...params} />}
                                 />

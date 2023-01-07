@@ -75,7 +75,6 @@ function Recipes() {
     async function fetchRecipes() {
         const response = await fetch("http://localhost:8080/recipes")
         const json = await response.json()
-        console.log(json)
         if (json.message) {
             setMessage(json.message)
             setRecipes([])
